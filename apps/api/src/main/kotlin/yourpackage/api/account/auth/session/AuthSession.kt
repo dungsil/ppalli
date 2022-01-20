@@ -23,31 +23,29 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth.jwt
+package yourpackage.api.account.auth.session
 
-import yourpackage.api.account.Account
-import yourpackage.api.global.security.usetdetail.UserDetailsImpl
+import org.springframework.data.annotation.Id
+import org.springframework.data.redis.core.RedisHash
+import org.springframework.data.redis.core.TimeToLive
+import org.springframework.data.redis.core.index.Indexed
+import java.util.concurrent.TimeUnit.MINUTES
 
 /**
- * Jwt 서비스
+ * 인증 세션
+ *
+ * @param id `account` 기본키
+ * @param accessToken 발급된 엑세스토큰
+ * @param expires 유효기간 (단위: 분)
  */
-interface JwtService {
+@RedisHash("auth-session")
+data class AuthSession(
+  @Id
+  val id: Long,
 
-  /**
-   * 토큰 발급
-   *
-   * @param account 토큰을 발급할 사용자 계정
-   * @return JWT 토큰
-   */
-  fun issueToken(account: Account): JwtToken
+  @Indexed
+  val accessToken: String,
 
-  fun validateToken(token: String?): Boolean
-
-  /**
-   * 토큰을 파싱해서 계정 정보를 가져온다.
-   *
-   * @param token 파싱할 토큰
-   * @return 토큰 사용자
-   */
-  fun parseToken(token: String): UserDetailsImpl
-}
+  @TimeToLive(unit = MINUTES)
+  val expires: Long
+)

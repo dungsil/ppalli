@@ -23,31 +23,12 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth.jwt
+package yourpackage.api.global.datasource
 
-import yourpackage.api.account.Account
-import yourpackage.api.global.security.usetdetail.UserDetailsImpl
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories
+import yourpackage.api.ProjectnameApi
 
-/**
- * Jwt 서비스
- */
-interface JwtService {
-
-  /**
-   * 토큰 발급
-   *
-   * @param account 토큰을 발급할 사용자 계정
-   * @return JWT 토큰
-   */
-  fun issueToken(account: Account): JwtToken
-
-  fun validateToken(token: String?): Boolean
-
-  /**
-   * 토큰을 파싱해서 계정 정보를 가져온다.
-   *
-   * @param token 파싱할 토큰
-   * @return 토큰 사용자
-   */
-  fun parseToken(token: String): UserDetailsImpl
-}
+@Configuration
+@EnableRedisRepositories(basePackageClasses = [ProjectnameApi::class])
+class RedisConfig

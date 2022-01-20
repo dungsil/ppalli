@@ -41,9 +41,9 @@ class JwtAuthFilter(private val jwts: JwtService) : OncePerRequestFilter() {
     val token = parseToken(request)
 
     // 토큰이 null 이 아니면 토큰 파싱
-    if (token != null) {
+    if (jwts.validateToken(token)) {
       try {
-        val account = jwts.parseToken(token)
+        val account = jwts.parseToken(token!!)
         val authentication = UsernamePasswordAuthenticationToken(account.account, null, account.authorities)
         SecurityContextHolder.getContext().authentication = authentication
       } catch (ignore: TokenExpiredException) {
