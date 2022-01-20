@@ -21,3 +21,4 @@ api:
   jwt:
     secret: ${env.API_JWT_SECRET}
     issuer: ${env.API_JWT_ISSUER}
+    expires: ${env.API_JWT_EXPIRE_MINUTE}
