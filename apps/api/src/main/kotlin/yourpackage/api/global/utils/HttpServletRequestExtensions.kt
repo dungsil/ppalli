@@ -23,29 +23,17 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth
+package yourpackage.api.global.utils
 
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import yourpackage.api.account.auth.jwt.JwtToken
-import yourpackage.api.global.utils.getClientIp
 import javax.servlet.http.HttpServletRequest
-import javax.validation.Valid
 
 /**
- * 계정 인증 컨트롤러
+ * 클라이언트의 IP를 가져온다.
+ *
+ * @return IPv4 혹은 IPv6 문자열
  */
-@RestController
-@RequestMapping("/accounts/auth")
-class AccountAuthController(private val srv: AccountAuthService) {
-
-  /**
-   * 인증 요청 (로그인)
-   */
-  @PostMapping
-  fun authorize(@Valid @RequestBody auth: AuthorizationRequest, req: HttpServletRequest): JwtToken {
-    return srv.authorize(auth, req.getClientIp())
-  }
+fun HttpServletRequest.getClientIp(): String {
+  return getHeader("X-FORWARDED-FOR") // proxy, load balance O
+    ?: getHeader("Proxy-Client-IP")
+    ?: remoteAddr // proxy, load balance x
 }

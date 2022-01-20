@@ -31,6 +31,7 @@ import yourpackage.api.account.auth.exception.AccountIsLockedException
 import yourpackage.api.account.auth.exception.AccountNotFoundException
 import yourpackage.api.account.auth.jwt.JwtService
 import yourpackage.api.account.auth.jwt.JwtToken
+import java.time.Instant
 
 /**
  * 계정 서비스
@@ -45,9 +46,10 @@ class AccountAuthService(
    * 로그인
    *
    * @param auth 사용자의 인증 요청
+   * @param requestIp 사용자 IP
    * @return 발급된 토큰 정보
    */
-  fun authorize(auth: AuthorizationRequest): JwtToken {
+  fun authorize(auth: AuthorizationRequest, requestIp: String): JwtToken {
     val account = repo.findByUsernameAndEnableIsTrue(auth.username!!)
       ?: throw AccountNotFoundException()
 
@@ -61,8 +63,10 @@ class AccountAuthService(
       throw AccountNotFoundException()
     }
 
-    // 로그인 성공 시 비밀번호 실패 횟수 초기화
-    account.password.resetFailedCount()
+    // 로그인 성공 시 후처리
+    account.password.resetFailedCount() // 비밀번호 입력 실패 횟수 초기화
+    account.lastLoginAt = Instant.now()
+    account.lastLoginIp = requestIp
     repo.saveAndFlush(account)
 
     return jwts.issueToken(account)
