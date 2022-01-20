@@ -26,7 +26,7 @@
 package yourpackage.api.account
 
 import yourpackage.api.global.constraints.IpAddress
-import yourpackage.api.global.jpa.CommonEntity
+import yourpackage.api.global.datasource.CommonEntity
 import java.time.Instant
 import javax.persistence.Column
 import javax.persistence.Embedded

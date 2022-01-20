@@ -23,32 +23,18 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.jpa
+package yourpackage.api.global.datasource
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import java.time.Instant
-import javax.persistence.Column
-import javax.persistence.MappedSuperclass
+import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.context.annotation.Configuration
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import yourpackage.api.ProjectnameApi
 
-/**
- * 공통 엔티티
- *
- * @property createdAt 생성일
- * @property lastModifiedAt 최근수정일
- * @property enable 활성화 여부
- */
-@MappedSuperclass
-abstract class CommonEntity(
-
-  @CreatedDate
-  @Column(name = "created_at", nullable = false, insertable = true, updatable = false)
-  open val createdAt: Instant = Instant.now(),
-
-  @LastModifiedDate
-  @Column(name = "last_modified_at", nullable = true)
-  open val lastModifiedAt: Instant? = null,
-
-  @Column(name = "enable", nullable = false)
-  open var enable: Boolean = true,
+@Configuration
+@EntityScan(basePackageClasses = [ProjectnameApi::class])
+@EnableJpaRepositories(basePackageClasses = [ProjectnameApi::class])
+@EnableJpaAuditing(
+  modifyOnCreate = false // 최근 수정일 기본 값을 `null`으로
 )
+class JpaConfig
