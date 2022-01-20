@@ -23,18 +23,17 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth.jwt
+package yourpackage.api.global.security.usetdetail
 
-import java.time.Instant
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.stereotype.Service
+import yourpackage.api.account.auth.AccountRepository
 
-/**
- * Jwt 토큰
- *
- * @param accessToken 엑세스 토큰
- */
-data class JwtToken(
-  val accessToken: String,
-  val exp: Long
-) {
-  constructor(accessToken: String, exp: Instant) : this(accessToken, exp.toEpochMilli())
+@Service
+class UserDetailsServiceImpl(private val repo: AccountRepository) : UserDetailsService {
+  override fun loadUserByUsername(username: String?): UserDetailsImpl? {
+    return username
+      ?.let { repo.findById(it.toLong()).get() }
+      ?.let { UserDetailsImpl(it) }
+  }
 }

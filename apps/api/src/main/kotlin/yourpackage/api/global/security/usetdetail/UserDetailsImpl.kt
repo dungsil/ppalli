@@ -23,35 +23,22 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth.jwt
+package yourpackage.api.global.security.usetdetail
 
-import com.auth0.jwt.exceptions.JWTCreationException
-import com.auth0.jwt.exceptions.JWTVerificationException
-import com.auth0.jwt.exceptions.TokenExpiredException
-import mu.KotlinLogging
-import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR
-import org.springframework.http.HttpStatus.UNAUTHORIZED
-import org.springframework.web.bind.annotation.ExceptionHandler
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
+import yourpackage.api.account.Account
 
-@RestControllerAdvice
-class JwtControllerAdvice {
-  private val log = KotlinLogging.logger {}
-
-  @ResponseStatus(INTERNAL_SERVER_ERROR)
-  @ExceptionHandler(JWTCreationException::class)
-  fun handleJwtCreationException(e: JWTCreationException) {
-    log.error("Invalid Signing configuration", e)
+data class UserDetailsImpl(val account: Account) : UserDetails {
+  override fun getUsername(): String = account.id.toString()
+  override fun getPassword(): String? = null
+  override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
+    return mutableListOf(SimpleGrantedAuthority("ROLE_USER")) // FIXME: 권한부여 변경 필요
   }
 
-  @ResponseStatus(UNAUTHORIZED)
-  @ExceptionHandler(JWTVerificationException::class)
-  fun handleJwtVerificationException() {
-  }
-
-  @ResponseStatus(UNAUTHORIZED)
-  @ExceptionHandler(TokenExpiredException::class)
-  fun handleTokenExpiredException() {
-  }
+  override fun isAccountNonLocked(): Boolean = account.password.isLocked()
+  override fun isAccountNonExpired(): Boolean = true
+  override fun isCredentialsNonExpired(): Boolean = true
+  override fun isEnabled(): Boolean = account.enable
 }

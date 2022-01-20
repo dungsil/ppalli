@@ -26,6 +26,7 @@
 package yourpackage.api.account.auth.jwt
 
 import yourpackage.api.account.Account
+import yourpackage.api.global.security.usetdetail.UserDetailsImpl
 
 /**
  * Jwt 서비스
@@ -39,4 +40,12 @@ interface JwtService {
    * @return JWT 토큰
    */
   fun issueToken(account: Account): JwtToken
+
+  /**
+   * 토큰을 파싱해서 계정 정보를 가져온다.
+   *
+   * @param token 파싱할 토큰
+   * @return 토큰 사용자
+   */
+  fun parseToken(token: String): UserDetailsImpl
 }
