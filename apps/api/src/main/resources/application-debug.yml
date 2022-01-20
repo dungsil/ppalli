@@ -1,0 +1,8 @@
+spring:
+  liquibase:
+    clear-checksums: true
+    drop-first: true
+
+logging:
+  level:
+    yourpackage: DEBUG
