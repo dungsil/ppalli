@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: ./db.changelog-main.yml
+  - changeSet:
+      id: test data
+      author: mail@kyg.kr
+      comment: 테스트용 데이터
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: username
+                  value: test
+              - column:
+                  name: encrypted_password
+                  value: "{bcrypt}$2a$10$GLF5JABUXMfd37vD3ztyT.WZKP4/LdCgX5ohXVFqHZzX6kqM2cRU2" # FIXME: 비밀번호 변경 필요
+              - column:
+                  name: email
+                  value: "test@example.com"

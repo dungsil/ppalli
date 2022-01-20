@@ -2,7 +2,7 @@ databaseChangeLog:
   - changeSet:
       id: v1.0.0
       comment: 데이터베이스 최초 생성
-      author: 김용건
+      author: mail@kyg.kr
       changes:
         # account_seq
         - createSequence:

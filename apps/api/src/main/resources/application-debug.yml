@@ -1,5 +1,6 @@
 spring:
   liquibase:
+    change-log: "classpath:yourpackage/db/db.changelog-debug.yml"
     clear-checksums: true
     drop-first: true
 
