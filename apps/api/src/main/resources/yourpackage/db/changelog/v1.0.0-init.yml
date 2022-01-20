@@ -1,0 +1,90 @@
+databaseChangeLog:
+  - changeSet:
+      id: v1.0.0
+      comment: 데이터베이스 최초 생성
+      author: 김용건
+      changes:
+        # account_seq
+        - createSequence:
+            sequenceName: account_seq
+            minValue: 1
+            maxValue: 9223372036854775807 # Long 타입 Max 값
+            startValue: 1
+            cacheSize: 50
+        # account
+        - createTable:
+            tableName: account
+            remarks: "사용자 계정 테이블"
+            columns:
+              - column:
+                  name: account_id
+                  type: bigint
+                  remarks: 기본키
+                  defaultValueSequenceNext: account_seq
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: account_pk
+              - column:
+                  name: username
+                  type: varchar
+                  remarks: 사용자 ID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: encrypted_password
+                  type: varchar
+                  remarks: 사용자 비밀번호
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(320)
+                  remarks: 사용자 이메일
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login_failed_count
+                  type: smallint
+                  remarks: 로그인 실패 횟수
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_login_failed_at
+                  type: timestamptz
+                  remarks: 최근 로그인 실패 횟수
+              - column:
+                  name: last_login_at
+                  type: timestamptz
+                  remarks: 최근 로그인 일시
+              - column:
+                  name: last_login_ip
+                  type: varchar
+                  remarks: 최근 로그인 IP
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  defaultValueDate: "now()"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_at
+                  type: timestamptz
+              - column:
+                  name: enable
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+        # account_idx
+        - createIndex:
+            tableName: account
+            indexName: account_idx
+            columns:
+              - column:
+                  name: username
+              - column:
+                  name: email
+              - column:
+                  name: enable
