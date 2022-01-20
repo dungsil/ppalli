@@ -33,10 +33,10 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import yourpackage.api.global.error.ErrorControllerImpl
+import yourpackage.api.global.error.GlobalErrorController
 
 @WebMvcTest
-class ErrorControllerImplTest {
+class GlobalErrorControllerTest {
 
   @Autowired
   lateinit var mock: MockMvc
@@ -45,7 +45,7 @@ class ErrorControllerImplTest {
   @DisplayName("정상적으로 오류코드를 리턴하는지 확인")
   fun handleError() {
     mock.perform(get("/error"))
-      .andExpect { handler().handlerType(ErrorControllerImpl::class.java) } // 제대로 등록되었는지 확인
+      .andExpect { handler().handlerType(GlobalErrorController::class.java) } // 제대로 등록되었는지 확인
       .andExpect { status().isNotFound } // 상태코드가 정상적으로 표시되는지 확인
   }
 }

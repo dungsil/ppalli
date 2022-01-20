@@ -41,7 +41,7 @@ import javax.servlet.http.HttpServletResponse
  */
 @RestController
 @RequestMapping("\${server.error.path:\${error.path:/error}}")
-class ErrorControllerImpl(
+class GlobalErrorController(
   @Value("\${server.error.path:\${error.path:/error}}")
   val errorPath: String
 ) : ErrorController {
