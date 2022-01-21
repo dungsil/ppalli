@@ -23,36 +23,25 @@
  *
  * SPDX-License-Identifier: MIT
  */
-plugins {
-  id("kotlin-jpa")
-  id("kotlin-spring")
-  id("org.springframework.boot")
-  id("io.spring.dependency-management")
-}
+package yourpackage.api
 
-dependencies {
-  // Spring boot
-  developmentOnly("org.springframework.boot:spring-boot-devtools")
-  implementation("org.springframework.boot:spring-boot-starter-validation")
-  implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-  implementation("org.springframework.boot:spring-boot-starter-data-redis")
-  implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("org.springframework.boot:spring-boot-starter-security")
-  testImplementation("org.springframework.boot:spring-boot-starter-test")
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Configuration
+import redis.embedded.RedisServer
+import javax.annotation.PostConstruct
+import javax.annotation.PreDestroy
 
-  // .env
-  implementation("me.paulschwarz:spring-dotenv:2.4.1")
+@Configuration
+class TestConfig(@Value("\${spring.redis.port}") port: Int) {
+  private val server: RedisServer = RedisServer(port)
 
-  // JDBC
-  runtimeOnly("org.postgresql:postgresql")
-  testRuntimeOnly("com.h2database:h2")
+  @PostConstruct
+  fun start() {
+    server.start()
+  }
 
-  // Liquibase
-  implementation("org.liquibase:liquibase-core")
-
-  // Jwt
-  implementation("com.auth0:java-jwt:3.18.3")
-
-  // embedded redis (test)
-  testImplementation("it.ozimov:embedded-redis:0.7.3")
+  @PreDestroy
+  fun stop() {
+    server.stop()
+  }
 }

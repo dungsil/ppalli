@@ -2,3 +2,11 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: "jdbc:h2:mem:ppalli;DB_CLOSE_DELAY=-1"
+  redis:
+    port: 16379
+
+api:
+  jwt:
+    secret: test
+    issuer: test
+    expires: 1
