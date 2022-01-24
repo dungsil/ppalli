@@ -23,10 +23,9 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth
+package yourpackage.api.account
 
 import org.springframework.data.jpa.repository.JpaRepository
-import yourpackage.api.account.Account
 
 interface AccountRepository : JpaRepository<Account, Long> {
   fun findByUsernameAndEnableIsTrue(username: String): Account?

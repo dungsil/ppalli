@@ -27,7 +27,7 @@ package yourpackage.api.global.security.usetdetail
 
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
-import yourpackage.api.account.auth.AccountRepository
+import yourpackage.api.account.AccountRepository
 
 @Service
 class UserDetailsServiceImpl(private val repo: AccountRepository) : UserDetailsService {

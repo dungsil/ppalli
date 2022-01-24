@@ -27,6 +27,7 @@ package yourpackage.api.account.auth
 
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import yourpackage.api.account.AccountRepository
 import yourpackage.api.account.auth.exception.AccountIsLockedException
 import yourpackage.api.account.auth.exception.AccountNotFoundException
 import yourpackage.api.account.auth.jwt.JwtService
