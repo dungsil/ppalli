@@ -25,17 +25,11 @@
  */
 package yourpackage.api.account
 
+import org.springframework.security.crypto.password.PasswordEncoder
 import yourpackage.api.global.constraints.IpAddress
 import yourpackage.api.global.datasource.CommonEntity
 import java.time.Instant
-import javax.persistence.Column
-import javax.persistence.Embedded
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.SequenceGenerator
-import javax.persistence.Table
+import javax.persistence.*
 import javax.validation.constraints.Email
 
 /**
@@ -48,7 +42,7 @@ import javax.validation.constraints.Email
   initialValue = 1,
   allocationSize = 1
 )
-data class Account(
+data class Account private constructor(
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
   @Column(name = "account_id")
@@ -73,6 +67,25 @@ data class Account(
 
   override var enable: Boolean = true
 ) : CommonEntity(enable = enable) {
+
+  /**
+   * 사용자 계정 엔티티
+   *
+   * @param username 사용자 계정
+   * @param rawPassword 비밀번호 평문
+   * @param passwordEncoder 비밀번호 암호화 도구
+   * @param email 사용자 이메일
+   */
+  constructor(
+    username: String,
+    rawPassword: String,
+    passwordEncoder: PasswordEncoder,
+    email: String
+  ) : this(
+    username = username,
+    password = AccountPassword(passwordEncoder.encode(rawPassword)),
+    email = email
+  )
 
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
