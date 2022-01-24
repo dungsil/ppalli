@@ -30,6 +30,12 @@ plugins {
   id("io.spring.dependency-management")
 }
 
+configurations {
+  all {
+    exclude("ch.qos.logback", "logback-classic")
+  }
+}
+
 dependencies {
   // Spring boot
   developmentOnly("org.springframework.boot:spring-boot-devtools")
