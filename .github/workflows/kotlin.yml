@@ -50,8 +50,14 @@ jobs:
           distribution: 'temurin'
           java-version: 17
           cache: 'gradle'
-      - name: Test running
+      - name: Run test
+        continue-on-error: true
         run: gradle test
+      - name: Publish test report
+        uses: mikepenz/action-junit-report@v2
+        if: always()
+        with:
+          report_paths: '**/build/**/test-results/tests/test/TEST-*.xml'
   qodana:
     name: "🔍 Scan code"
     runs-on: ubuntu-latest
