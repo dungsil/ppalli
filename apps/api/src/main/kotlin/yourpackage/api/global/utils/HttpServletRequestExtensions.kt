@@ -33,7 +33,7 @@ import javax.servlet.http.HttpServletRequest
  * @return IPv4 혹은 IPv6 문자열
  */
 fun HttpServletRequest.getClientIp(): String {
-  return getHeader("X-FORWARDED-FOR") // proxy, load balance O
+  return getHeader("X-Forwarded-For") // proxy, load balance O
     ?: getHeader("Proxy-Client-IP")
     ?: remoteAddr // proxy, load balance x
 }
