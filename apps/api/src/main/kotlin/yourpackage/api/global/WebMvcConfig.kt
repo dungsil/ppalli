@@ -37,7 +37,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
  */
 @Configuration
 @EnableWebMvc
-class WebMvcConfiguration(val mappingJackson2HttpMessageConverter: MappingJackson2HttpMessageConverter) :
+class WebMvcConfig(val mappingJackson2HttpMessageConverter: MappingJackson2HttpMessageConverter) :
   WebMvcConfigurer {
   override fun configureMessageConverters(converters: MutableList<HttpMessageConverter<*>>) {
     // `@EnableWebMvc` 어노테이션이 Jackson 설정을 덮어 버려서 다시 설정해줘야 한다.
