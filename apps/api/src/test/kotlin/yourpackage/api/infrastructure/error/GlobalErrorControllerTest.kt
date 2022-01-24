@@ -29,17 +29,22 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import yourpackage.api.account.auth.jwt.JwtService
 import yourpackage.api.global.error.GlobalErrorController
 
-@WebMvcTest
+@WebMvcTest(GlobalErrorController::class)
 class GlobalErrorControllerTest {
 
   @Autowired
   lateinit var mock: MockMvc
+
+  @MockBean
+  lateinit var jwtService: JwtService
 
   @Test
   @DisplayName("정상적으로 오류코드를 리턴하는지 확인")
