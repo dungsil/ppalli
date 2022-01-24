@@ -54,7 +54,7 @@ subprojects {
   dependencies {
     "implementation"(kotlin("stdlib-jdk8"))
     "implementation"(kotlin("reflect"))
-    "implementation"("io.github.microutils:kotlin-logging-jvm:2.1.20")
+    "implementation"("io.github.microutils:kotlin-logging-jvm:2.1.21")
     "testImplementation"(kotlin("test-junit5"))
   }
 
