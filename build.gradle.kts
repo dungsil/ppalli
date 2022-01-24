@@ -60,7 +60,7 @@ subprojects {
 
   tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
-      jvmTarget = "11"
+      jvmTarget = "17"
       freeCompilerArgs = listOf("-Xjsr305=strict")
     }
   }
