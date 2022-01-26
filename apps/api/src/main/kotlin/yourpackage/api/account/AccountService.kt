@@ -27,11 +27,10 @@ package yourpackage.api.account
 
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.request.ServletRequestAttributes
 import yourpackage.api.account.exception.AccountIsLockedException
 import yourpackage.api.account.exception.AccountNotFoundException
 import yourpackage.api.global.utils.getClientIp
+import yourpackage.api.global.utils.getHttpServletRequest
 import java.time.Instant
 
 @Service
@@ -69,13 +68,10 @@ class AccountService(
       throw AccountNotFoundException()
     }
 
-    // 사용자 요청을 가져옴
-    val req = (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).request
-
     // 로그인 성공 시 후처리
     account.password.resetFailedCount() // 비밀번호 입력 실패 횟수 초기화
     account.lastLoginAt = Instant.now()
-    account.lastLoginIp = req.getClientIp()
+    account.lastLoginIp = getHttpServletRequest().getClientIp()
 
     return repo.saveAndFlush(account)
   }

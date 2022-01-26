@@ -25,7 +25,16 @@
  */
 package yourpackage.api.global.utils
 
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import javax.servlet.http.HttpServletRequest
+
+/**
+ * @return  현재 요청의 [HttpServletRequest]를 가져옴
+ */
+fun getHttpServletRequest(): HttpServletRequest {
+  return (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).request
+}
 
 /**
  * 클라이언트의 IP를 가져온다.
@@ -39,9 +48,7 @@ fun HttpServletRequest.getClientIp(): String {
 }
 
 /**
- * 엑세스 토큰을 가져온다
- *
- * @return 없을 경우 null
+ * @return 엑세스 토큰을 가져온다, 없을 경우 null
  */
 fun HttpServletRequest.getAccessToken(): String? {
   return getHeader("Authorization")
