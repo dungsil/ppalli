@@ -29,4 +29,5 @@ import org.springframework.data.repository.CrudRepository
 
 interface AuthSessionRepository : CrudRepository<AuthSession, Long> {
   fun findByAccessToken(accessToken: String): AuthSession?
+  fun deleteByAccessToken(accessToken: String)
 }

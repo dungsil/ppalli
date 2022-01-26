@@ -49,4 +49,11 @@ interface JwtService {
    * @return 토큰 사용자의 기본키
    */
   fun getAccountIdByToken(accessToken: String): Long
+
+  /**
+   * 사용자 토큰 제거
+   *
+   * @param accessToken 엑세스 토큰
+   */
+  fun revokeToken(accessToken: String)
 }

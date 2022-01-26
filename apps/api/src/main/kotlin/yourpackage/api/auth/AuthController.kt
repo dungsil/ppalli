@@ -25,10 +25,8 @@
  */
 package yourpackage.api.auth
 
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import yourpackage.api.account.AccountService
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.auth.jwt.JwtToken
@@ -53,5 +51,17 @@ class AuthController(
   fun authorize(@Valid @RequestBody auth: AuthorizationRequest): JwtToken {
     val account = accounts.authorize(auth.username!!, auth.rawPassword!!)
     return jwts.issueToken(account)
+  }
+
+  @DeleteMapping
+  fun revoke(req: HttpServletRequest): ResponseEntity<Unit> {
+    val accssToken = req.getAccessToken()
+      ?: return ResponseEntity.badRequest().build() // 토큰이 없으면 무시
+
+    jwts.revokeToken(accssToken)
+
+    return ResponseEntity
+      .noContent()
+      .build()
   }
 }

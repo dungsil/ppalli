@@ -95,6 +95,7 @@ class Auth0JwtService(
   }
 
   override fun revokeToken(accessToken: String) {
-    sessions.deleteByAccessToken(accessToken)
+    val id = getAccountIdByToken(accessToken)
+    sessions.deleteById(id)
   }
 }
