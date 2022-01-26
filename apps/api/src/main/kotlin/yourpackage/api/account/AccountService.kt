@@ -23,35 +23,40 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.auth
+package yourpackage.api.account
 
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import yourpackage.api.account.AccountRepository
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import yourpackage.api.account.exception.AccountIsLockedException
 import yourpackage.api.account.exception.AccountNotFoundException
-import yourpackage.api.auth.jwt.JwtService
-import yourpackage.api.auth.jwt.JwtToken
+import yourpackage.api.global.utils.getClientIp
 import java.time.Instant
 
-/**
- * 계정 서비스
- */
 @Service
-class AuthService(
+class AccountService(
   private val repo: AccountRepository,
-  private val jwts: JwtService,
   private val encoder: PasswordEncoder
 ) {
+
+  /**
+   * 사용자 아이디를 기반으로 사용자 정보를 가져오는 메소드
+   */
+  fun get(id: Long): Account {
+    return repo.findByIdAndEnableIsTrue(id)
+      ?: throw AccountNotFoundException()
+  }
+
   /**
    * 로그인
    *
-   * @param auth 사용자의 인증 요청
-   * @param requestIp 사용자 IP
-   * @return 발급된 토큰 정보
+   * @param username 사용자 ID
+   * @param rawPassword 평문 비밀번호
+   * @return 로그인 된 사용자
    */
-  fun authorize(auth: AuthorizationRequest, requestIp: String): JwtToken {
-    val account = repo.findByUsernameAndEnableIsTrue(auth.username!!)
+  fun authorize(username: String, rawPassword: String): Account {
+    val account = repo.findByUsernameAndEnableIsTrue(username)
       ?: throw AccountNotFoundException()
 
     // 계정이 잠금 시도 상태인지 확인
@@ -60,16 +65,18 @@ class AuthService(
     }
 
     // 비밀번호가 일치하는지 확인
-    if (account.password.isIncorrectPassword(encoder, auth.rawPassword!!)) {
+    if (account.password.isIncorrectPassword(encoder, rawPassword)) {
       throw AccountNotFoundException()
     }
+
+    // 사용자 요청을 가져옴
+    val req = (RequestContextHolder.currentRequestAttributes() as ServletRequestAttributes).request
 
     // 로그인 성공 시 후처리
     account.password.resetFailedCount() // 비밀번호 입력 실패 횟수 초기화
     account.lastLoginAt = Instant.now()
-    account.lastLoginIp = requestIp
-    repo.saveAndFlush(account)
+    account.lastLoginIp = req.getClientIp()
 
-    return jwts.issueToken(account)
+    return repo.saveAndFlush(account)
   }
 }

@@ -27,9 +27,12 @@ package yourpackage.api.global.security
 
 import com.auth0.jwt.exceptions.TokenExpiredException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
+import yourpackage.api.account.AccountService
+import yourpackage.api.account.exception.AccountNotFoundException
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.global.utils.getAccessToken
 import javax.servlet.FilterChain
@@ -37,17 +40,24 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class JwtAuthFilter(private val jwts: JwtService) : OncePerRequestFilter() {
+class JwtAuthFilter(private val jwts: JwtService, private val accounts: AccountService) : OncePerRequestFilter() {
   override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, c: FilterChain) {
     val token = request.getAccessToken()
 
     // 토큰이 null 이 아니면 토큰 파싱
     if (jwts.validateToken(token)) {
       try {
-        val account = jwts.parseToken(token!!)
-        val authentication = UsernamePasswordAuthenticationToken(account.account, null, account.authorities)
+        val id = jwts.getAccountIdByToken(token!!)
+        val account = accounts.get(id)
+
+        val authentication = UsernamePasswordAuthenticationToken(
+          account,
+          null,
+          mutableListOf(SimpleGrantedAuthority("ROLE_USER")) // TODO: 권한 기능 추가
+        )
         SecurityContextHolder.getContext().authentication = authentication
       } catch (ignore: TokenExpiredException) {
+      } catch (ignore: AccountNotFoundException) {
       }
     }
 

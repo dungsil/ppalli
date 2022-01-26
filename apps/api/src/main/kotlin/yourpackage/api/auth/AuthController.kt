@@ -29,8 +29,10 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import yourpackage.api.account.AccountService
+import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.auth.jwt.JwtToken
-import yourpackage.api.global.utils.getClientIp
+import yourpackage.api.global.utils.getAccessToken
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 
@@ -38,14 +40,18 @@ import javax.validation.Valid
  * 계정 인증 컨트롤러
  */
 @RestController
-@RequestMapping("/accounts/auth")
-class AuthController(private val srv: AuthService) {
+@RequestMapping("/auth")
+class AuthController(
+  private val accounts: AccountService,
+  private val jwts: JwtService,
+) {
 
   /**
    * 인증 요청 (로그인)
    */
   @PostMapping
-  fun authorize(@Valid @RequestBody auth: AuthorizationRequest, req: HttpServletRequest): JwtToken {
-    return srv.authorize(auth, req.getClientIp())
+  fun authorize(@Valid @RequestBody auth: AuthorizationRequest): JwtToken {
+    val account = accounts.authorize(auth.username!!, auth.rawPassword!!)
+    return jwts.issueToken(account)
   }
 }

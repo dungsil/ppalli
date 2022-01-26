@@ -30,11 +30,8 @@ import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import yourpackage.api.account.Account
-import yourpackage.api.account.exception.AccountNotFoundException
 import yourpackage.api.auth.session.AuthSession
 import yourpackage.api.auth.session.AuthSessionRepository
-import yourpackage.api.global.security.usetdetail.UserDetailsImpl
-import yourpackage.api.global.security.usetdetail.UserDetailsServiceImpl
 import java.time.Instant
 import java.time.temporal.ChronoUnit.MINUTES
 import java.util.*
@@ -44,11 +41,10 @@ import java.util.*
  */
 @Service
 class Auth0JwtService(
-    @Value("\${api.jwt.secret}") private val secret: String,
-    @Value("\${api.jwt.issuer}") private val issuer: String,
-    @Value("\${api.jwt.expires}") private val expiresMinute: Long,
-    private val sessions: AuthSessionRepository,
-    private val userDetails: UserDetailsServiceImpl
+  @Value("\${api.jwt.secret}") private val secret: String,
+  @Value("\${api.jwt.issuer}") private val issuer: String,
+  @Value("\${api.jwt.expires}") private val expiresMinute: Long,
+  private val sessions: AuthSessionRepository
 ) : JwtService {
   /**
    * JWT 인코딩 알고리즘
@@ -94,10 +90,11 @@ class Auth0JwtService(
     return sessions.findByAccessToken(token) != null
   }
 
-  override fun parseToken(token: String): UserDetailsImpl {
-    val accountId = verifier.verify(token).id
+  override fun getAccountIdByToken(accessToken: String): Long {
+    return verifier.verify(accessToken).id.toLong()
+  }
 
-    return userDetails.loadUserByUsername(accountId)
-      ?: throw AccountNotFoundException()
+  override fun revokeToken(accessToken: String) {
+    sessions.deleteByAccessToken(accessToken)
   }
 }

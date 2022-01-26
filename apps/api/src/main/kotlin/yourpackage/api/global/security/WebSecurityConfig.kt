@@ -57,7 +57,7 @@ class WebSecurityConfig(private val jwtAuthFilter: JwtAuthFilter) : WebSecurityC
 
     // 인증 경로
     http.authorizeRequests()
-      .mvcMatchers(HttpMethod.POST, "/accounts/auth").anonymous() // 로그인
+      .mvcMatchers(HttpMethod.POST, "/auth").anonymous() // 로그인
       .anyRequest().fullyAuthenticated() // 기본 값은 전체 인증필요
   }
 }
