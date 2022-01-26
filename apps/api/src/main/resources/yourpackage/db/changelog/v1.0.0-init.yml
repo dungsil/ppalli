@@ -88,3 +88,39 @@ databaseChangeLog:
                   name: email
               - column:
                   name: enable
+        # account_role
+        - createTable:
+            tableName: account_role
+            remarks: 사용자 역할 정의
+            columns:
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: account_role_pk
+                    references: account(account_id)
+                    foreignKeyName: account_role_fk--account_id
+              - column:
+                  name: role
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: account_role_pk
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  defaultValueDate: "now()"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_at
+                  type: timestamptz
+              - column:
+                  name: enable
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

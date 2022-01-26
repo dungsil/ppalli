@@ -23,33 +23,16 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.datasource
+package yourpackage.api.account.extension
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import java.io.Serializable
-import java.time.Instant
-import javax.persistence.Column
-import javax.persistence.MappedSuperclass
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
+import yourpackage.api.account.AccountRole
 
 /**
- * 공통 엔티티
- *
- * @property createdAt 생성일
- * @property lastModifiedAt 최근수정일
- * @property enable 활성화 여부
+ * Spring security에서 사용하는 [GrantedAuthority] 인터페이스를 반환한다.
  */
-@MappedSuperclass
-abstract class CommonEntity(
-
-  @CreatedDate
-  @Column(name = "created_at", nullable = false, insertable = true, updatable = false)
-  open val createdAt: Instant = Instant.now(),
-
-  @LastModifiedDate
-  @Column(name = "last_modified_at", nullable = true)
-  open val lastModifiedAt: Instant? = null,
-
-  @Column(name = "enable", nullable = false)
-  open var enable: Boolean = true,
-) : Serializable
+fun List<AccountRole>.toAuthorities(): MutableList<GrantedAuthority> {
+  return this.map { SimpleGrantedAuthority(it.role) }
+    .toMutableList()
+}

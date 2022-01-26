@@ -23,33 +23,41 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.datasource
+package yourpackage.api.account
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import java.io.Serializable
-import java.time.Instant
-import javax.persistence.Column
-import javax.persistence.MappedSuperclass
+import yourpackage.api.global.datasource.CommonEntity
+import javax.persistence.*
 
 /**
- * 공통 엔티티
+ * 계정 권한
  *
- * @property createdAt 생성일
- * @property lastModifiedAt 최근수정일
- * @property enable 활성화 여부
+ * @param account 해당 계정
+ * @param role 권한
  */
-@MappedSuperclass
-abstract class CommonEntity(
+@Entity
+@Table(name = "account_role")
+data class AccountRole private constructor(
+  @Id
+  @ManyToOne
+  @JoinColumn(name = "account_id")
+  var account: Account? = null,
 
-  @CreatedDate
-  @Column(name = "created_at", nullable = false, insertable = true, updatable = false)
-  open val createdAt: Instant = Instant.now(),
+  @Id
+  @Column(name = "role")
+  val role: String
+) : CommonEntity() {
+  constructor(role: String) : this(null, role)
 
-  @LastModifiedDate
-  @Column(name = "last_modified_at", nullable = true)
-  open val lastModifiedAt: Instant? = null,
+  override fun toString(): String = this.role
 
-  @Column(name = "enable", nullable = false)
-  open var enable: Boolean = true,
-) : Serializable
+  companion object {
+    /**
+     * 기본 계정 권한을 가져오는 메소드
+     *
+     * @return 기본 권한 목록
+     */
+    fun default(): MutableList<AccountRole> {
+      return mutableListOf(AccountRole(role = "default")) // TODO: 기본 권한 해결
+    }
+  }
+}

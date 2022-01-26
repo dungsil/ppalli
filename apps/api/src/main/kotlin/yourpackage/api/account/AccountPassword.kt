@@ -84,5 +84,11 @@ data class AccountPassword(
       this.lastLoginFailedAt?.plus(30, ChronoUnit.MINUTES)?.isAfter(Instant.now()) == true
   }
 
-  override fun toString(): String = "${this::class.simpleName} (Password is not displayed)"
+  override fun toString(): String {
+    return "${this::class.simpleName}(" +
+      "password = [mask], " +
+      "failedCount = $failedCount, " +
+      "lastLoginFailedAt = $lastLoginFailedAt" +
+      ")"
+  }
 }

@@ -58,6 +58,9 @@ data class Account private constructor(
   @Column(name = "email")
   var email: String,
 
+  @OneToMany(mappedBy = "account")
+  val roles: MutableList<AccountRole> = AccountRole.default(),
+
   @Column(name = "last_login_at")
   var lastLoginAt: Instant? = null,
 
@@ -80,12 +83,22 @@ data class Account private constructor(
     username: String,
     rawPassword: String,
     passwordEncoder: PasswordEncoder,
-    email: String
+    email: String,
+    roles: MutableList<AccountRole> = AccountRole.default()
   ) : this(
     username = username,
     password = AccountPassword(passwordEncoder.encode(rawPassword)),
-    email = email
+    email = email,
+    roles = roles
   )
+
+  @PrePersist
+  @PreUpdate
+  private fun setAccountToRole() {
+    for (role in this.roles) {
+      role.account = this
+    }
+  }
 
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
@@ -114,5 +127,5 @@ data class Account private constructor(
   }
 
   // 보안 상 비밀번호를 표시하지 않는다.
-  override fun toString(): String = "${this::class.simpleName} (id = $id, username = $username)"
+  override fun toString(): String = "${this::class.simpleName} (id = $id, username = $username, roles = $roles)"
 }

@@ -27,12 +27,12 @@ package yourpackage.api.global.security
 
 import com.auth0.jwt.exceptions.TokenExpiredException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import yourpackage.api.account.AccountService
 import yourpackage.api.account.exception.AccountNotFoundException
+import yourpackage.api.account.extension.toAuthorities
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.global.utils.getAccessToken
 import javax.servlet.FilterChain
@@ -53,7 +53,7 @@ class JwtAuthFilter(private val jwts: JwtService, private val accounts: AccountS
         val authentication = UsernamePasswordAuthenticationToken(
           account,
           null,
-          mutableListOf(SimpleGrantedAuthority("ROLE_USER")) // TODO: 권한 기능 추가
+          account.roles.toAuthorities()
         )
         SecurityContextHolder.getContext().authentication = authentication
       } catch (ignore: TokenExpiredException) {

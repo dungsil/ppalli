@@ -32,6 +32,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.context.annotation.Import
 import org.springframework.security.crypto.password.PasswordEncoder
 import yourpackage.api.global.security.CryptoConfig
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 @DataJpaTest
@@ -59,5 +60,9 @@ internal class AccountTest {
     assertTrue("ID는 1이상이여야 합니다.") { account.id > 0 }
     assertTrue { account.username == "test" }
     assertTrue { account.email == "test@example.com" }
+
+    // AccountRole 테스트
+    assertEquals(account, account.roles[0].account)
+    assertEquals("default", account.roles[0].role) // TODO: 기본 계정 권한 변경
   }
 }
