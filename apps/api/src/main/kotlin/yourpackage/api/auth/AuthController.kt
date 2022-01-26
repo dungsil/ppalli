@@ -25,11 +25,13 @@
  */
 package yourpackage.api.auth
 
-import org.springframework.http.ResponseEntity
+import org.springframework.http.HttpStatus.NO_CONTENT
+import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.web.bind.annotation.*
 import yourpackage.api.account.AccountService
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.auth.jwt.JwtToken
+import yourpackage.api.global.error.exception.ProjectnameException
 import yourpackage.api.global.utils.getAccessToken
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
@@ -53,15 +55,15 @@ class AuthController(
     return jwts.issueToken(account)
   }
 
+  /**
+   * 로그아웃
+   */
   @DeleteMapping
-  fun revoke(req: HttpServletRequest): ResponseEntity<Unit> {
+  @ResponseStatus(NO_CONTENT)
+  fun revoke(req: HttpServletRequest) {
     val accssToken = req.getAccessToken()
-      ?: return ResponseEntity.badRequest().build() // 토큰이 없으면 무시
+      ?: throw ProjectnameException(UNAUTHORIZED) // 토큰이 없으면 무시
 
     jwts.revokeToken(accssToken)
-
-    return ResponseEntity
-      .noContent()
-      .build()
   }
 }
