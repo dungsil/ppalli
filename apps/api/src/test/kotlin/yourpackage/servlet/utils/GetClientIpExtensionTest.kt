@@ -23,7 +23,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.utils
+package yourpackage.servlet.utils
 
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test

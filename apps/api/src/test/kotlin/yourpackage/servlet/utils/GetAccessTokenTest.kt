@@ -23,7 +23,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.utils
+package yourpackage.servlet.utils
 
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -51,7 +51,10 @@ internal class GetAccessTokenTest {
   fun testBearerHs256() {
     val req = mock.perform(
       get("/")
-        .header("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c")
+        .header(
+          "Authorization",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        )
     )
 
     req.andDo {

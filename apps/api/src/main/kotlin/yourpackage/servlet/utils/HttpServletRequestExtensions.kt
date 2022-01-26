@@ -23,7 +23,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.utils
+package yourpackage.servlet.utils
 
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes

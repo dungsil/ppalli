@@ -29,8 +29,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import yourpackage.api.account.exception.AccountIsLockedException
 import yourpackage.api.account.exception.AccountNotFoundException
-import yourpackage.api.global.utils.getClientIp
-import yourpackage.api.global.utils.getHttpServletRequest
+import yourpackage.servlet.utils.getClientIp
+import yourpackage.servlet.utils.getHttpServletRequest
 import java.time.Instant
 
 @Service

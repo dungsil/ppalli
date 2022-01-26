@@ -23,7 +23,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.global.constraints
+package yourpackage.validator
 
 import javax.validation.Constraint
 import javax.validation.ConstraintValidator
@@ -39,7 +39,7 @@ import kotlin.reflect.KClass
 @Retention(RUNTIME)
 @Constraint(validatedBy = [IpAddress.Validator::class])
 annotation class IpAddress(
-  val message: String = "{yourpackage.api.global.constraints.IpAddress.message}",
+  val message: String = "{yourpackage.validatorIpAddress.message}",
   val groups: Array<KClass<*>> = [],
   val payload: Array<KClass<*>> = [],
   val nullable: Boolean = true

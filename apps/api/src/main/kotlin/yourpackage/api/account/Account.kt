@@ -26,8 +26,8 @@
 package yourpackage.api.account
 
 import org.springframework.security.crypto.password.PasswordEncoder
-import yourpackage.api.global.constraints.IpAddress
 import yourpackage.api.global.datasource.CommonEntity
+import yourpackage.validator.IpAddress
 import java.time.Instant
 import javax.persistence.*
 import javax.validation.constraints.Email

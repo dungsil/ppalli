@@ -34,7 +34,7 @@ import yourpackage.api.account.AccountService
 import yourpackage.api.account.exception.AccountNotFoundException
 import yourpackage.api.account.extension.toAuthorities
 import yourpackage.api.auth.jwt.JwtService
-import yourpackage.api.global.utils.getAccessToken
+import yourpackage.servlet.utils.getAccessToken
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse

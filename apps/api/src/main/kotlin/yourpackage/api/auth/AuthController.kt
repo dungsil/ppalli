@@ -32,7 +32,7 @@ import yourpackage.api.account.AccountService
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.auth.jwt.JwtToken
 import yourpackage.api.global.error.exception.ProjectnameException
-import yourpackage.api.global.utils.getAccessToken
+import yourpackage.servlet.utils.getAccessToken
 import javax.servlet.http.HttpServletRequest
 import javax.validation.Valid
 
