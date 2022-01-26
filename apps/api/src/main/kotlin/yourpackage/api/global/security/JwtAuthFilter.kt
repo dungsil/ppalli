@@ -31,6 +31,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import yourpackage.api.auth.jwt.JwtService
+import yourpackage.api.global.utils.getAccessToken
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -38,7 +39,7 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class JwtAuthFilter(private val jwts: JwtService) : OncePerRequestFilter() {
   override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, c: FilterChain) {
-    val token = parseToken(request)
+    val token = request.getAccessToken()
 
     // 토큰이 null 이 아니면 토큰 파싱
     if (jwts.validateToken(token)) {
@@ -51,10 +52,5 @@ class JwtAuthFilter(private val jwts: JwtService) : OncePerRequestFilter() {
     }
 
     c.doFilter(request, response)
-  }
-
-  private fun parseToken(request: HttpServletRequest): String? {
-    return request.getHeader("Authorization")
-      ?.replaceFirst("Bearer ", "") // 토큰타입 제거
   }
 }

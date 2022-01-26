@@ -37,3 +37,13 @@ fun HttpServletRequest.getClientIp(): String {
     ?: getHeader("Proxy-Client-IP")
     ?: remoteAddr // proxy, load balance x
 }
+
+/**
+ * 엑세스 토큰을 가져온다
+ *
+ * @return 없을 경우 null
+ */
+fun HttpServletRequest.getAccessToken(): String? {
+  return getHeader("Authorization")
+    ?.replaceFirst("Bearer ", "") // 토큰타입 제거
+}

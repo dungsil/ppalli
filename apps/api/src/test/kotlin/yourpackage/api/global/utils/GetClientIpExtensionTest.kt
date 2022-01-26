@@ -31,8 +31,9 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import yourpackage.api.global.error.GlobalErrorController
+import kotlin.test.assertEquals
 
-class HttpServletRequestExtensionsTest {
+class GetClientIpExtensionTest {
   private val mock: MockMvc = MockMvcBuilders
     .standaloneSetup(GlobalErrorController::class)
     .build()
@@ -48,7 +49,7 @@ class HttpServletRequestExtensionsTest {
         }
     )
 
-    req.andDo { it.request.getClientIp() === "48.132.33.189" }
+    req.andDo { assertEquals("48.132.33.189", it.request.getClientIp()) }
   }
 
   @Test
@@ -63,7 +64,7 @@ class HttpServletRequestExtensionsTest {
         }
     )
 
-    req.andDo { it.request.getClientIp() === "47.78.66.16" }
+    req.andDo { assertEquals("47.78.66.16", it.request.getClientIp()) }
   }
 
   @Test
@@ -78,6 +79,6 @@ class HttpServletRequestExtensionsTest {
         }
     )
 
-    req.andDo { it.request.getClientIp() === "93.32.71.149" }
+    req.andDo { assertEquals("93.32.71.149", it.request.getClientIp()) }
   }
 }
