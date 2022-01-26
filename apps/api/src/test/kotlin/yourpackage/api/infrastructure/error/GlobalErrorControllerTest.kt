@@ -34,6 +34,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import yourpackage.api.account.AccountService
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.global.error.GlobalErrorController
 
@@ -45,6 +46,9 @@ class GlobalErrorControllerTest {
 
   @MockBean
   lateinit var jwtService: JwtService
+
+  @MockBean
+  lateinit var accountService: AccountService
 
   @Test
   @DisplayName("정상적으로 오류코드를 리턴하는지 확인")
