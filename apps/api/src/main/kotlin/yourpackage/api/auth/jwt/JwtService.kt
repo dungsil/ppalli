@@ -23,29 +23,31 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth
+package yourpackage.api.auth.jwt
 
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import yourpackage.api.account.auth.jwt.JwtToken
-import yourpackage.api.global.utils.getClientIp
-import javax.servlet.http.HttpServletRequest
-import javax.validation.Valid
+import yourpackage.api.account.Account
+import yourpackage.api.global.security.usetdetail.UserDetailsImpl
 
 /**
- * 계정 인증 컨트롤러
+ * Jwt 서비스
  */
-@RestController
-@RequestMapping("/accounts/auth")
-class AccountAuthController(private val srv: AccountAuthService) {
+interface JwtService {
 
   /**
-   * 인증 요청 (로그인)
+   * 토큰 발급
+   *
+   * @param account 토큰을 발급할 사용자 계정
+   * @return JWT 토큰
    */
-  @PostMapping
-  fun authorize(@Valid @RequestBody auth: AuthorizationRequest, req: HttpServletRequest): JwtToken {
-    return srv.authorize(auth, req.getClientIp())
-  }
+  fun issueToken(account: Account): JwtToken
+
+  fun validateToken(token: String?): Boolean
+
+  /**
+   * 토큰을 파싱해서 계정 정보를 가져온다.
+   *
+   * @param token 파싱할 토큰
+   * @return 토큰 사용자
+   */
+  fun parseToken(token: String): UserDetailsImpl
 }

@@ -23,22 +23,22 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth
+package yourpackage.api.auth
 
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import yourpackage.api.account.AccountRepository
-import yourpackage.api.account.auth.exception.AccountIsLockedException
-import yourpackage.api.account.auth.exception.AccountNotFoundException
-import yourpackage.api.account.auth.jwt.JwtService
-import yourpackage.api.account.auth.jwt.JwtToken
+import yourpackage.api.account.exception.AccountIsLockedException
+import yourpackage.api.account.exception.AccountNotFoundException
+import yourpackage.api.auth.jwt.JwtService
+import yourpackage.api.auth.jwt.JwtToken
 import java.time.Instant
 
 /**
  * 계정 서비스
  */
 @Service
-class AccountAuthService(
+class AuthService(
   private val repo: AccountRepository,
   private val jwts: JwtService,
   private val encoder: PasswordEncoder

@@ -23,7 +23,10 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth
+package yourpackage.api.auth.session
 
-class UsernameNotFoundException {
+import org.springframework.data.repository.CrudRepository
+
+interface AuthSessionRepository : CrudRepository<AuthSession, Long> {
+  fun findByAccessToken(accessToken: String): AuthSession?
 }

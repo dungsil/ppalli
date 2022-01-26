@@ -23,32 +23,32 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth.jwt
+package yourpackage.api.auth.jwt
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import yourpackage.api.account.Account
-import yourpackage.api.account.auth.exception.AccountNotFoundException
-import yourpackage.api.account.auth.session.AuthSession
-import yourpackage.api.account.auth.session.AuthSessionRepository
+import yourpackage.api.account.exception.AccountNotFoundException
+import yourpackage.api.auth.session.AuthSession
+import yourpackage.api.auth.session.AuthSessionRepository
 import yourpackage.api.global.security.usetdetail.UserDetailsImpl
 import yourpackage.api.global.security.usetdetail.UserDetailsServiceImpl
 import java.time.Instant
 import java.time.temporal.ChronoUnit.MINUTES
-import java.util.Date
+import java.util.*
 
 /**
  * [com.auth0.jwt.JWT]를 사용하는 Jwt 구현체
  */
 @Service
 class Auth0JwtService(
-  @Value("\${api.jwt.secret}") private val secret: String,
-  @Value("\${api.jwt.issuer}") private val issuer: String,
-  @Value("\${api.jwt.expires}") private val expiresMinute: Long,
-  private val sessions: AuthSessionRepository,
-  private val userDetails: UserDetailsServiceImpl
+    @Value("\${api.jwt.secret}") private val secret: String,
+    @Value("\${api.jwt.issuer}") private val issuer: String,
+    @Value("\${api.jwt.expires}") private val expiresMinute: Long,
+    private val sessions: AuthSessionRepository,
+    private val userDetails: UserDetailsServiceImpl
 ) : JwtService {
   /**
    * JWT 인코딩 알고리즘

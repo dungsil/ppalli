@@ -23,7 +23,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-package yourpackage.api.account.auth.exception
+package yourpackage.api.account.exception
 
 import org.springframework.http.HttpStatus.UNAUTHORIZED
 import yourpackage.api.global.error.exception.ProjectnameException
