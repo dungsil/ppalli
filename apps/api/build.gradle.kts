@@ -30,12 +30,6 @@ plugins {
   id("io.spring.dependency-management")
 }
 
-configurations {
-  all {
-    exclude("ch.qos.logback", "logback-classic")
-  }
-}
-
 dependencies {
   // Spring boot
   developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -60,5 +54,7 @@ dependencies {
   implementation("com.auth0:java-jwt:3.18.3")
 
   // embedded redis (test)
-  testImplementation("it.ozimov:embedded-redis:0.7.3")
+  testImplementation("it.ozimov:embedded-redis:0.7.3") {
+    exclude(group = "org.slf4j")
+  }
 }
