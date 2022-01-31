@@ -34,7 +34,7 @@ plugins {
   id("org.jetbrains.kotlinx.kover") version "0.5.0-RC2"
 
   // Spring boot
-  id("org.springframework.boot") version "2.6.2" apply false
+  id("org.springframework.boot") version "2.6.3" apply false
   id("io.spring.dependency-management") version "1.0.11.RELEASE" apply false
 }
 
