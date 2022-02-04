@@ -61,9 +61,9 @@ class AuthController(
   @DeleteMapping
   @ResponseStatus(NO_CONTENT)
   fun revoke(req: HttpServletRequest) {
-    val accssToken = req.getAccessToken()
+    val accessToken = req.getAccessToken()
       ?: throw ProjectnameException(UNAUTHORIZED) // 토큰이 없으면 무시
 
-    jwts.revokeToken(accssToken)
+    jwts.revokeToken(accessToken)
   }
 }
