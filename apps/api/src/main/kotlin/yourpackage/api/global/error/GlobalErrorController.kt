@@ -52,7 +52,7 @@ class GlobalErrorController(
     request: HttpServletRequest,
     response: HttpServletResponse,
     e: Exception?
-  ): ResponseEntity<Unit> {
+  ): ResponseEntity<Errors> {
     var status = HttpStatus.valueOf(response.status)
 
     // 에러페이지에서 성공이 표시되지 않도록
@@ -60,12 +60,8 @@ class GlobalErrorController(
       status = HttpStatus.NOT_FOUND
     }
 
-    if (e != null) {
-      log.debug { e.printStackTrace() }
-    }
-
     return ResponseEntity
       .status(status)
-      .build()
+      .body(Errors.of(status))
   }
 }

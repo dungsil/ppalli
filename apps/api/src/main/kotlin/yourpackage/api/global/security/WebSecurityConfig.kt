@@ -25,6 +25,7 @@
  */
 package yourpackage.api.global.security
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus.UNAUTHORIZED
@@ -33,13 +34,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.config.http.SessionCreationPolicy.STATELESS
-import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import yourpackage.api.global.error.Errors
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-class WebSecurityConfig(private val jwtAuthFilter: JwtAuthFilter) : WebSecurityConfigurerAdapter() {
+class WebSecurityConfig(
+  private val jwtAuthFilter: JwtAuthFilter,
+  private val om: ObjectMapper
+) : WebSecurityConfigurerAdapter() {
   override fun configure(http: HttpSecurity) {
     // JWT 인증을 사용하므로 필요없는 항목 제거
     http
@@ -50,7 +54,12 @@ class WebSecurityConfig(private val jwtAuthFilter: JwtAuthFilter) : WebSecurityC
 
     // 미인증시 401 오류 리턴
     http.exceptionHandling()
-      .authenticationEntryPoint(HttpStatusEntryPoint(UNAUTHORIZED))
+      .authenticationEntryPoint { _, res, _ ->
+        res.status = 401
+        res.contentType = "application/json"
+        res.writer.write(om.writeValueAsString(Errors.of(UNAUTHORIZED)))
+        res.flushBuffer()
+      }
 
     // JWT 필터 추가
     http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
