@@ -33,7 +33,9 @@ import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.auth.jwt.JwtToken
 import yourpackage.api.global.error.exception.ProjectnameException
 import yourpackage.servlet.utils.getAccessToken
+import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 import javax.validation.Valid
 
 /**
@@ -50,9 +52,19 @@ class AuthController(
    * 인증 요청 (로그인)
    */
   @PostMapping
-  fun authorize(@Valid @RequestBody auth: AuthorizationRequest): JwtToken {
-    val account = accounts.authorize(auth.username!!, auth.rawPassword!!)
-    return jwts.issueToken(account)
+  fun authorize(@Valid @RequestBody auth: AuthorizationRequest, res: HttpServletResponse): JwtToken {
+    val account = accounts.authorize(auth.username!!, auth.rawPassword!!) // 로그인
+    val token = jwts.issueToken(account) // 토큰 발급
+
+    // 리프래시 토큰을 쿠키에 저장
+    val cookie = Cookie("refresh_token", token.refreshToken).apply {
+      secure = true
+      isHttpOnly = true
+      path = "/"
+    }
+    res.addCookie(cookie)
+
+    return token
   }
 
   /**

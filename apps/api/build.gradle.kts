@@ -35,7 +35,6 @@ dependencies {
   developmentOnly("org.springframework.boot:spring-boot-devtools")
   implementation("org.springframework.boot:spring-boot-starter-validation")
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-  implementation("org.springframework.boot:spring-boot-starter-data-redis")
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.springframework.boot:spring-boot-starter-security")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -52,9 +51,4 @@ dependencies {
 
   // Jwt
   implementation("com.auth0:java-jwt:3.18.3")
-
-  // embedded redis (test)
-  testImplementation("it.ozimov:embedded-redis:0.7.3") {
-    exclude(group = "org.slf4j")
-  }
 }

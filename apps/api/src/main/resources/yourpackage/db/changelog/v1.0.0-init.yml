@@ -59,6 +59,14 @@ databaseChangeLog:
                   type: timestamptz
                   remarks: 최근 로그인 일시
               - column:
+                  name: refresh_token
+                  type: uuid
+                  remarks: 리프래시 토큰
+                  constraints:
+                    nullable: true
+                    unique: true
+                    uniqueConstraintName: account_uidx--refresh_token
+              - column:
                   name: last_login_ip
                   type: varchar
                   remarks: 최근 로그인 IP

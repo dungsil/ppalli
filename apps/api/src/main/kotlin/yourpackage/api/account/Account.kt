@@ -29,6 +29,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import yourpackage.api.global.datasource.CommonEntity
 import yourpackage.validator.IpAddress
 import java.time.Instant
+import java.util.UUID
 import javax.persistence.*
 import javax.validation.constraints.Email
 
@@ -60,6 +61,9 @@ data class Account private constructor(
 
   @OneToMany(mappedBy = "account")
   val roles: MutableList<AccountRole> = AccountRole.default(),
+
+  @Column(name = "refresh_token", unique = true)
+  var refreshToken: UUID? = null,
 
   @Column(name = "last_login_at")
   var lastLoginAt: Instant? = null,

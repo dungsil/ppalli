@@ -26,8 +26,10 @@
 package yourpackage.api.auth.jwt
 
 import yourpackage.api.account.Account
+import yourpackage.api.account.AccountRepository
 import java.time.Instant
 import java.time.temporal.ChronoUnit
+import java.util.UUID
 
 /**
  * Jwt 서비스
@@ -37,6 +39,7 @@ import java.time.temporal.ChronoUnit
  * @property expiresMinute Jwt 유효 시간 (단위: 분)
  */
 interface JwtService {
+  val repo: AccountRepository
   val secret: String
   val issuer: String
   val expiresMinute: Long
@@ -51,9 +54,14 @@ interface JwtService {
     val expireDate = Instant.now().plus(expiresMinute, ChronoUnit.MINUTES)
 
     val accessToken = issueAccessToken(account, expireDate)
+    val refreshToken = UUID.randomUUID()
+
+    account.refreshToken = refreshToken
+    repo.saveAndFlush(account)
 
     return JwtToken(
-      accessToken = accessToken,
+      accessToken,
+      refreshToken = refreshToken.toString(),
       exp = expireDate
     )
   }
