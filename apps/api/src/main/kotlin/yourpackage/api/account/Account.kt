@@ -43,7 +43,7 @@ import javax.validation.constraints.Email
   initialValue = 1,
   allocationSize = 1
 )
-data class Account private constructor(
+class Account private constructor(
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
   @Column(name = "account_id")

@@ -36,7 +36,7 @@ import javax.persistence.*
  */
 @Entity
 @Table(name = "account_role")
-data class AccountRole private constructor(
+class AccountRole private constructor(
   @Id
   @ManyToOne
   @JoinColumn(name = "account_id")
@@ -48,8 +48,25 @@ data class AccountRole private constructor(
 ) : CommonEntity() {
   constructor(role: String) : this(null, role)
 
-  override fun toString(): String = this.role
 
+  override fun equals(other: Any?): Boolean {
+    if (this === other) return true
+    if (other !is AccountRole) return false
+
+    if (account != other.account) return false
+    if (role != other.role) return false
+
+    return true
+  }
+
+  override fun hashCode(): Int {
+    var result = account?.hashCode() ?: 0
+    result = 31 * result + role.hashCode()
+    return result
+  }
+
+  override fun toString(): String = this.role
+  
   companion object {
     /**
      * 기본 계정 권한을 가져오는 메소드
