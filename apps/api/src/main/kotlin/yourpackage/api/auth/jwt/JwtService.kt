@@ -26,11 +26,20 @@
 package yourpackage.api.auth.jwt
 
 import yourpackage.api.account.Account
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 /**
  * Jwt 서비스
+ *
+ * @property secret Jwt 비밀 키
+ * @property issuer Jwt 발급자, 일반적으로 도메인
+ * @property expiresMinute Jwt 유효 시간 (단위: 분)
  */
 interface JwtService {
+  val secret: String
+  val issuer: String
+  val expiresMinute: Long
 
   /**
    * 토큰 발급
@@ -38,8 +47,32 @@ interface JwtService {
    * @param account 토큰을 발급할 사용자 계정
    * @return JWT 토큰
    */
-  fun issueToken(account: Account): JwtToken
+  fun issueToken(account: Account): JwtToken {
+    val expireDate = Instant.now().plus(expiresMinute, ChronoUnit.MINUTES)
 
+    val accessToken = issueAccessToken(account, expireDate)
+
+    return JwtToken(
+      accessToken = accessToken,
+      exp = expireDate
+    )
+  }
+
+  /**
+   * 엑세스 토큰 발급
+   *
+   * @param account 발급 대상 계정
+   * @param expireDate 토큰 유효기간
+   * @return Jwt 엑세스 토큰
+   */
+  fun issueAccessToken(account: Account, expireDate: Instant): String
+
+  /**
+   * 토큰 유효성 검증
+   *
+   * @param token 유효성을 검증할 토큰
+   * @return 유효한 토큰일 경우 true
+   */
   fun validateToken(token: String?): Boolean
 
   /**

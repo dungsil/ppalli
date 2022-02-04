@@ -25,13 +25,11 @@
  */
 package yourpackage.api.global.security
 
-import com.auth0.jwt.exceptions.TokenExpiredException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import yourpackage.api.account.AccountService
-import yourpackage.api.account.exception.AccountNotFoundException
 import yourpackage.api.account.extension.toAuthorities
 import yourpackage.api.auth.jwt.JwtService
 import yourpackage.servlet.utils.getAccessToken
@@ -44,21 +42,17 @@ class JwtAuthFilter(private val jwts: JwtService, private val accounts: AccountS
   override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, c: FilterChain) {
     val token = request.getAccessToken()
 
-    // 토큰이 null 이 아니면 토큰 파싱
-    if (jwts.validateToken(token)) {
-      try {
-        val id = jwts.getAccountIdByToken(token!!)
-        val account = accounts.get(id)
+    if (jwts.validateToken(token)) { // 토큰 유효성 검증
+      val id = jwts.getAccountIdByToken(token!!)
+      val account = accounts.get(id)
 
-        val authentication = UsernamePasswordAuthenticationToken(
-          account,
-          null,
-          account.roles.toAuthorities()
-        )
-        SecurityContextHolder.getContext().authentication = authentication
-      } catch (ignore: TokenExpiredException) {
-      } catch (ignore: AccountNotFoundException) {
-      }
+      val authentication = UsernamePasswordAuthenticationToken(
+        account,
+        null,
+        account.roles.toAuthorities()
+      )
+
+      SecurityContextHolder.getContext().authentication = authentication
     }
 
     c.doFilter(request, response)

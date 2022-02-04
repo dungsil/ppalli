@@ -27,59 +27,46 @@ package yourpackage.api.auth.jwt
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.exceptions.JWTVerificationException
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import yourpackage.api.account.Account
-import yourpackage.api.auth.session.AuthSession
-import yourpackage.api.auth.session.AuthSessionRepository
 import java.time.Instant
-import java.time.temporal.ChronoUnit.MINUTES
-import java.util.*
+import java.util.Date
 
-/**
- * [com.auth0.jwt.JWT]를 사용하는 Jwt 구현체
- */
+
 @Service
+@Suppress("LeakingThis")
 class Auth0JwtService(
-  @Value("\${api.jwt.secret}") private val secret: String,
-  @Value("\${api.jwt.issuer}") private val issuer: String,
-  @Value("\${api.jwt.expires}") private val expiresMinute: Long,
-  private val sessions: AuthSessionRepository
+  @Value("\${api.jwt.secret}")
+  override val secret: String,
+
+  @Value("\${api.jwt.issuer}")
+  override val issuer: String,
+
+  @Value("\${api.jwt.expires}")
+  override val expiresMinute: Long
 ) : JwtService {
   /**
    * JWT 인코딩 알고리즘
    */
-  private val algorithm = Algorithm.HMAC512(secret)
+  private val algorithm = Algorithm.HMAC512(this.secret)
 
   /**
    * JWT 검증 유틸리티
    */
-  private val verifier = JWT.require(algorithm).withIssuer(issuer).build()
+  private val verifier = JWT.require(algorithm).withIssuer(this.issuer).build()
 
-  override fun issueToken(account: Account): JwtToken {
-    val expireDate = Instant.now().plus(expiresMinute, MINUTES)
-
-    val accessToken = JWT.create()
+  override fun issueAccessToken(account: Account, expireDate: Instant): String {
+    return JWT.create()
       .withJWTId(account.id.toString())
       .withClaim("username", account.username)
+      .withClaim("roles", account.roles)
+      .withClaim("last_login_at", account.lastLoginAt?.toString())
       .withIssuer(issuer)
       .withIssuedAt(Date())
       .withExpiresAt(Date.from(expireDate))
       .sign(algorithm)
-
-    // 발급된 토큰 저장
-    sessions.save(
-      AuthSession(
-        id = account.id,
-        accessToken = accessToken,
-        expires = expiresMinute
-      )
-    )
-
-    return JwtToken(
-      accessToken = accessToken,
-      exp = expireDate
-    )
   }
 
   override fun validateToken(token: String?): Boolean {
@@ -87,7 +74,11 @@ class Auth0JwtService(
       return false
     }
 
-    return sessions.findByAccessToken(token) != null
+    return try {
+      verifier.verify(token) != null
+    } catch (ignore: JWTVerificationException) { // Jwt 유효성 검증 실패 시 발생
+      return false
+    }
   }
 
   override fun getAccountIdByToken(accessToken: String): Long {
@@ -96,6 +87,7 @@ class Auth0JwtService(
 
   override fun revokeToken(accessToken: String) {
     val id = getAccountIdByToken(accessToken)
-    sessions.deleteById(id)
+
+    TODO("리프래시 토큰 제거")
   }
 }
