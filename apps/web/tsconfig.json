@@ -1,0 +1,21 @@
+{
+  "extends": "../../common/tsconfig.base.json",
+  "compilerOptions": {
+    "typeRoots": [
+      "types"
+    ],
+    "types": [
+      "vite/client",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client",
+      "@intlify/vite-plugin-vue-i18n/client"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
