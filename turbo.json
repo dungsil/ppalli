@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo-site-git-fork-arthurfiorette-main.vercel.sh/schema.json",
+  "baseBranch": "origin/main",
+  "npmClient": "pnpm",
+  "globalDependencies": [
+    ".env",
+    "common/tsconfig.base.json"
+  ],
+  "pipeline": {
+    "dev": {
+      "cache": false
+    }
+  }
+}
