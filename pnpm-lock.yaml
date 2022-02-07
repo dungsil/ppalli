@@ -22,7 +22,7 @@ importers:
     specifiers:
       '@iconify/vue': 3.1.3
       '@intlify/vite-plugin-vue-i18n': 3.2.2
-      '@types/node': 16.11.7
+      '@types/node': 16.11.22
       '@vitejs/plugin-vue': 2.1.0
       '@vueuse/core': 7.5.5
       '@vueuse/head': 0.7.5
@@ -44,7 +44,7 @@ importers:
     devDependencies:
       '@iconify/vue': 3.1.3_vue@3.2.29
       '@intlify/vite-plugin-vue-i18n': 3.2.2_vite@2.7.13+vue-i18n@9.1.9
-      '@types/node': 16.11.7
+      '@types/node': 16.11.22
       '@vitejs/plugin-vue': 2.1.0_vite@2.7.13+vue@3.2.29
       typescript: 4.5.5
       vite: 2.7.13
@@ -233,8 +233,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@types/node/16.11.7:
-    resolution: {integrity: sha512-QB5D2sqfSjCmTuWcBWyJ+/44bcjO7VbjSbOE0ucoVbAsSNQc4Lt6QkgkVXkTDwkL4z/beecZNDvVX15D4P8Jbw==}
+  /@types/node/16.11.22:
+    resolution: {integrity: sha512-DYNtJWauMQ9RNpesl4aVothr97/tIJM8HbyOXJ0AYT1Z2bEjLHyfjOBPAQQVMLf8h3kSShYfNk8Wnto8B2zHUA==}
     dev: true
 
   /@types/throttle-debounce/2.1.0:
