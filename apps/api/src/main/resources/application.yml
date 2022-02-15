@@ -18,6 +18,8 @@ server:
   port: ${env.API_PORT:8080}
 
 api:
+  web:
+    base: ${env.WEB_BASE}
   jwt:
     secret: ${env.API_JWT_SECRET}
     issuer: ${env.API_JWT_ISSUER}
