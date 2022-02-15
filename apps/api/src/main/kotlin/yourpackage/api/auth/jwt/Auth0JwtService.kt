@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import yourpackage.api.account.Account
 import yourpackage.api.account.AccountRepository
 import java.time.Instant
+import java.time.temporal.ChronoUnit
 import java.util.Date
 
 
@@ -16,7 +17,7 @@ import java.util.Date
 @Suppress("LeakingThis")
 class Auth0JwtService(
   override val repo: AccountRepository,
-  
+
   @Value("\${api.jwt.secret}")
   override val secret: String,
 

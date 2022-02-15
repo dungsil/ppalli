@@ -9,6 +9,7 @@ import yourpackage.api.auth.jwt.JwtService
 import yourpackage.api.auth.jwt.JwtToken
 import yourpackage.api.global.error.exception.ProjectnameException
 import yourpackage.servlet.utils.getAccessToken
+import java.util.UUID
 import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -41,6 +42,21 @@ class AuthController(
     res.addCookie(cookie)
 
     return token
+  }
+
+  /**
+   * 리프래시 토큰 인증
+   */
+  @PostMapping("/refresh")
+  fun authorizeRefresh(@CookieValue("refresh_token", required = true) refreshToken: UUID): JwtToken {
+    val account = accounts.getAccountByRefreshToken(refreshToken)
+    val token = jwts.issueAccessTokenAndExpireInstant(account)
+
+    return JwtToken(
+      accessToken = token.first,
+      refreshToken = refreshToken,
+      exp = token.second
+    )
   }
 
   /**

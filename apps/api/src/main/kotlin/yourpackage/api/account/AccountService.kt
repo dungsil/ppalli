@@ -8,6 +8,7 @@ import yourpackage.api.account.exception.AccountNotFoundException
 import yourpackage.servlet.utils.getClientIp
 import yourpackage.servlet.utils.getHttpServletRequest
 import java.time.Instant
+import java.util.UUID
 
 @Service
 class AccountService(
@@ -18,8 +19,16 @@ class AccountService(
   /**
    * 사용자 아이디를 기반으로 사용자 정보를 가져오는 메소드
    */
-  fun get(id: Long): Account {
+  fun getAccountById(id: Long): Account {
     return repo.findByIdAndEnableIsTrue(id)
+      ?: throw AccountNotFoundException()
+  }
+
+  /**
+   * 리프래시 토큰을 기반으로 사용자 정보를 가져온다.
+   */
+  fun getAccountByRefreshToken(refreshToken: UUID): Account {
+    return repo.findByRefreshTokenAndEnableIsTrue(refreshToken)
       ?: throw AccountNotFoundException()
   }
 

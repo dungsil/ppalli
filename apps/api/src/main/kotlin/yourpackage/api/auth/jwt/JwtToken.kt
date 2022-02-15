@@ -2,6 +2,7 @@
 package yourpackage.api.auth.jwt
 
 import java.time.Instant
+import java.util.UUID
 
 /**
  * Jwt 토큰
@@ -23,9 +24,9 @@ data class JwtToken(
    * @param refreshToken 리프래시 토큰
    * @param exp 토큰 유효기간 (단위: 유닉스 타임)
    */
-  constructor(accessToken: String, refreshToken: String, exp: Instant) : this(
+  constructor(accessToken: String, refreshToken: UUID, exp: Instant) : this(
     accessToken,
-    refreshToken,
+    refreshToken.toString(),
     exp.toEpochMilli()
   )
 }

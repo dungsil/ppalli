@@ -20,7 +20,7 @@ class JwtAuthFilter(private val jwts: JwtService, private val accounts: AccountS
 
     if (jwts.validateToken(token)) { // 토큰 유효성 검증
       val id = jwts.getAccountIdByToken(token!!)
-      val account = accounts.get(id)
+      val account = accounts.getAccountById(id)
 
       val authentication = UsernamePasswordAuthenticationToken(
         account,

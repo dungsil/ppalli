@@ -36,10 +36,23 @@ interface JwtService {
     repo.saveAndFlush(account)
 
     return JwtToken(
-      accessToken,
-      refreshToken = refreshToken.toString(),
+      accessToken = accessToken,
+      refreshToken = refreshToken,
       exp = expireDate
     )
+  }
+
+  /**
+   * 엑세스 토큰과 함게 유효기간을 함께 리턴
+   *
+   * @param account 토큰을 발급할 계정
+   * @return [Pair.first] 엑세스토큰, [Pair.second]: 유효기간
+   */
+  fun issueAccessTokenAndExpireInstant(account: Account): Pair<String, Instant> {
+    val expires = Instant.now().plus(expiresMinute, ChronoUnit.MINUTES)
+    val token = issueAccessToken(account, expires)
+
+    return token to expires
   }
 
   /**
