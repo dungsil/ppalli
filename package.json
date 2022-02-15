@@ -2,14 +2,14 @@
   "name": "projectname",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@6.24.2",
   "engines": {
     "node": ">=14 <=16",
-    "pnpm": "^6"
+    "pnpm": "^6.24.2"
   },
   "scripts": {
     "prepare:husky": "husky install common/git-hooks",
     "prepare": "run-p prepare:*",
-
     "dev": "turbo run dev --parallel",
     "build": "turbo run build --parallel"
   },
