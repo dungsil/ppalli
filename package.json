@@ -9,7 +9,9 @@
   "scripts": {
     "prepare:husky": "husky install common/git-hooks",
     "prepare": "run-p prepare:*",
-    "dev": "turbo run dev --parallel"
+
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build --parallel"
   },
   "devDependencies": {
     "@dungsil/prettier-config": "1.2.1",
