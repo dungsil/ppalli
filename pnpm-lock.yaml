@@ -28,7 +28,7 @@ importers:
       '@vueuse/head': 0.7.5
       typescript: 4.5.5
       vite: 2.7.13
-      vite-plugin-pages: 0.20.1
+      vite-plugin-pages: 0.21.4
       vite-plugin-vue-layouts: 0.6.0
       vite-plugin-windicss: 1.6.3
       vite-ssg: 0.17.9
@@ -48,7 +48,7 @@ importers:
       '@vitejs/plugin-vue': 2.1.0_vite@2.7.13+vue@3.2.29
       typescript: 4.5.5
       vite: 2.7.13
-      vite-plugin-pages: 0.20.1_vite@2.7.13
+      vite-plugin-pages: 0.21.4_vite@2.7.13
       vite-plugin-vue-layouts: 0.6.0_5be28afadb16af157591decefdfd37a0
       vite-plugin-windicss: 1.6.3_vite@2.7.13
       vite-ssg: 0.17.9_1bb316eb6353b112aaf21201968c84c6
@@ -2035,8 +2035,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-pages/0.20.1_vite@2.7.13:
-    resolution: {integrity: sha512-VHKE1/39HW4vqUcGLO6blq8MKqzP73kxYW9bykH1ihRfhgp7HLMCgTvmag6zDa66iKafzM3orzjVeIg4dUA+4A==}
+  /vite-plugin-pages/0.21.4_vite@2.7.13:
+    resolution: {integrity: sha512-2vtEkOjAXHARNUx0M636XfFtMlg1rFYmSbrsfNckxqG32A6COYD0y4EX3jtIonccc6CdKHubw6sR5xIS9t5Qyw==}
     peerDependencies:
       '@vue/compiler-sfc': '>=3'
       vite: '>=2'
@@ -2049,6 +2049,7 @@ packages:
       fast-glob: 3.2.11
       json5: 2.2.0
       local-pkg: 0.4.1
+      picocolors: 1.0.0
       vite: 2.7.13
       yaml: 2.0.0-10
     transitivePeerDependencies:
