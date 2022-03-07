@@ -7,7 +7,7 @@ plugins {
 
   // Kotlin (Global)
   id("org.jetbrains.dokka") version "1.6.10"
-  id("org.jetbrains.kotlinx.kover") version "0.5.0-RC2"
+  id("org.jetbrains.kotlinx.kover") version "0.5.0"
 
   // Spring boot
   id("org.springframework.boot") version "2.6.4" apply false
