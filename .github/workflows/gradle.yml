@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - "gradle/wrapper/**/*"
+      - "gradle/wrapper/**"
       - "gradlew"
       - "gradlew.bat"
       - "gradle.properties"
       - ".github/workflows/gradle.yml"
   pull_request:
     paths:
-      - "gradle/wrapper/**/*"
+      - "gradle/wrapper/**"
       - "gradlew"
       - "gradlew.bat"
       - "gradle.properties"

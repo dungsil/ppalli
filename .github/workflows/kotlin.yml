@@ -6,13 +6,13 @@ on:
     branches:
       - main
     paths:
-      - "**/*.kt"
-      - "**/*.kts"
+      - "**.kt"
+      - "**.kts"
       - ".github/workflows/kotlin.yml"
   pull_request:
     paths:
-      - "**/*.kt"
-      - "**/*.kts"
+      - "**.kt"
+      - "**.kts"
       - ".github/workflows/kotlin.yml"
 
 jobs:
