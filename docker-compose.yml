@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    ports:
+      - "${PPALLI_DB_PORT}:5432"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      LANG: C.utf8
+      POSTGRES_USER: ${PPALLI_DB_USERNAME}
+      POSTGRES_PASSWORD: ${PPALLI_DB_PASSWORD}
+      POSTGRES_DB: ${PPALLI_DB_NAME}
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - "${PPALLI_REDIS_PORT}:6379"
+
+volumes:
+  postgres:

@@ -1,0 +1,126 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0.0.0-init
+      author: companyname
+      comment: 최초 버전
+      changes:
+        # account_seq
+        - createSequence:
+            sequenceName: account_seq
+            minValue: 1
+            maxValue: 9223372036854775807 # Long 타입 Max 값
+            startValue: 1000
+            cacheSize: 50
+        # account
+        - createTable:
+            tableName: account
+            remarks: "사용자 계정 테이블"
+            columns:
+              - column:
+                  name: account_id
+                  type: bigint
+                  remarks: 기본키
+                  defaultValueSequenceNext: account_seq
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: account_pk
+              - column:
+                  name: username
+                  type: varchar
+                  remarks: 사용자 ID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: encrypted_password
+                  type: varchar
+                  remarks: 사용자 비밀번호
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(320)
+                  remarks: 사용자 이메일
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login_failed_count
+                  type: smallint
+                  remarks: 로그인 실패 횟수
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_login_failed_at
+                  type: timestamptz
+                  remarks: 최근 로그인 실패 횟수
+              - column:
+                  name: last_login_at
+                  type: timestamptz
+                  remarks: 최근 로그인 일시
+              - column:
+                  name: last_login_ip
+                  type: varchar
+                  remarks: 최근 로그인 IP
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  defaultValueDate: "now()"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_at
+                  type: timestamptz
+              - column:
+                  name: enable
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+        # account_idx
+        - createIndex:
+            tableName: account
+            indexName: account_idx
+            columns:
+              - column:
+                  name: username
+              - column:
+                  name: email
+              - column:
+                  name: enable
+        # account_role
+        - createTable:
+            tableName: account_role
+            remarks: 사용자 역할 정의
+            columns:
+              - column:
+                  name: account_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: account_role_pk
+                    references: account(account_id)
+                    foreignKeyName: account_role_fk--account_id
+              - column:
+                  name: role
+                  type: varchar
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: account_role_pk
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  defaultValueDate: "now()"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_modified_at
+                  type: timestamptz
+              - column:
+                  name: enable
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false

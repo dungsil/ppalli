@@ -1,0 +1,44 @@
+# 파일 별 속성을 정의하는 파일
+#
+# 세부 정보:
+#   text    지정된 파일은 정규화됩니다. (EOL을 CRLF에서 LF로 변경 등)
+#   binary  지정된 파일은 무시합니다.
+########################################################################################################################
+
+# 자동 감지
+# 정의되지 않은 텍스트 파일을 자동으로 감지 후 텍스트 파일이면 EOL을 LF로 정규화
+* text=auto eol=lf
+
+# 마크다운
+*.md    text diff=markdown
+*.mdx   text diff=markdown
+
+# 마크업
+*.html text diff=html
+*.xml  text diff=html
+*.vue  text diff=html
+
+# 스타일시트
+*.css  text diff=css
+*.scss text diff=css
+*.less text diff=css
+
+# 데이터 전송 언어
+*.json text
+*.toml text
+*.yaml text
+*.yml  text
+
+# 기타 문서
+LICENSE      text
+CHANGELOG    text
+AUTHORS      text
+CONTRIBUTING text
+COPYING      text
+COPYRIGHT    text
+
+# .env
+*.env  text
+
+# Node.js
+.*rc text diff=json

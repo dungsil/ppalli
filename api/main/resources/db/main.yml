@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - includeAll:
+      relativeToChangelogFile: true # 상대 경로로 경로 추가
+      path: ./changelog

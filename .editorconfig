@@ -1,0 +1,19 @@
+# EditorConfig는 다양한 편집기 및 IDE 간의 일관된 코딩 스타일을 정의하고 유지하기 위한 도구입니다.
+# EditorConfig.org
+root = true
+
+# 글로벌 설정
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+tab_width = 2
+max_line_length = 120
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# 마크다운
+[*.md]
+indent_style = tab
+trim_trailing_whitespace = false

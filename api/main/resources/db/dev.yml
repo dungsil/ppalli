@@ -1,0 +1,34 @@
+# 개발용 데이터 추가
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: ./main.yml
+  - changeSet:
+      id: dev
+      comment: 개발용 테스트 데이터 추가
+      author: companyname
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: account_id
+                  valueNumeric: 101
+              - column:
+                  name: username
+                  value: test
+              - column:
+                  name: encrypted_password
+                  value: "{noop}test123!"
+              - column:
+                  name: email
+                  value: test@example.com
+        - insert:
+            tableName: account_role
+            columns:
+              - column:
+                  name: account_id
+                  valueNumeric: 101
+              - column:
+                  name: role
+                  value: ROLE_USER

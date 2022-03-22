@@ -1,0 +1,62 @@
+# 버전관리(Git)에 포함되지 않을 파일을 정의
+
+######################
+# 프로젝트
+######################
+.env
+
+######################
+# 로그
+######################
+*.log*
+
+######################
+# Node.js
+######################
+node_modules/
+
+######################
+# Gradle
+######################
+.gradle/
+build/
+
+######################
+# Eclipse platform
+######################
+tmp/
+.settings/
+.externalToolBuilders/
+.sts4-cache/
+.classpath
+.project
+.metadata
+.buildpath
+
+######################
+# IntelliJ platform
+######################
+.idea/
+!.idea/jsonSchemas.xml
+!.idea/runConfigurations/
+out/
+*.iml
+*.iws
+*.ipr
+*.ids
+
+######################
+# Visual Studio Code
+######################
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+######################
+# Turborepo
+######################
+.turbo/
+.nuxt/

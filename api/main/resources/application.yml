@@ -1,0 +1,40 @@
+# 어플리케이션 설정
+projectname:
+  auth:
+    issuer: ${env.PPALLI_AUTH_ISSUER:${PPALLI_AUTH_ISSUER}}
+    secret: ${env.PPALLI_AUTH_SECRET:${PPALLI_AUTH_SECRET}}
+    access-token-expires: ${env.PPALLI_AUTH_EXPIRES:${PPALLI_AUTH_EXPIRES}}
+    refresh-token-expires: ${env.PPALLI_AUTH_REFRESH_EXPIRE:${PPALLI_AUTH_REFRESH_EXPIRE}}
+
+# Spring boot 설정
+spring:
+  session:
+    store-type: redis
+  jackson:
+    default-property-inclusion: non_null
+    property-naming-strategy: SNAKE_CASE
+    date-format: com.fasterxml.jackson.databind.util.StdDateFormat
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: "jdbc:postgresql://${env.PPALLI_DB_HOST:${PPALLI_DB_HOST}}:${env.PPALLI_DB_PORT:${PPALLI_DB_PORT}}/${env.PPALLI_DB_NAME:${PPALLI_DB_NAME}}"
+    username: ${env.PPALLI_DB_USERNAME:${PPALLI_DB_USERNAME}}
+    password: ${env.PPALLI_DB_PASSWORD:${PPALLI_DB_PASSWORD}}
+  redis:
+    host: ${env.PPALLI_REDIS_HOST:${PPALLI_REDIS_HOST}}
+    port: ${env.PPALLI_REDIS_PORT:${PPALLI_REDIS_PORT}}
+  liquibase:
+    change-log: "classpath:db/main.yml" # 데이터베이스 마이그레이션 설정 파일 위치
+  jpa:
+    show-sql: false # 보안
+    open-in-view: false # 성능
+    hibernate:
+      ddl-auto: validate # 어플리케이션 시작 시 DB 검증
+
+# Tomcat 설정
+server:
+  error:
+    whitelabel.enabled: false
+    include-binding-errors: never
+    include-message: never
+    include-stacktrace: never
+    include-exception: false

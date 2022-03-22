@@ -1,0 +1,14 @@
+{
+  "description": "종속성 관리를 위한 renovate 설정. 미사용 시 해당 파일을 삭제해주세요.",
+  "extends": ["@dungsil"],
+  "npm": {
+    "enabled": true
+  },
+  "gradle": {
+    "enabled": true,
+    "fileMatch": ["common/versions.toml", "build.gradle.kts"]
+  },
+  "gradle-wrapper": {
+    "enabled": true
+  }
+}

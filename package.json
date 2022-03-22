@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "projectname",
+  "version": "0.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "docker:start": "docker-compose -p projectname --env-file ./common/.env.dev up -d",
+    "docker:stop": "docker-compose -p projectname --env-file ./common/.env.dev down",
+    "docker:restart": "docker-compose -p projectname --env-file ./common/.env.dev up --force-recreate -d",
+    "web:dev": "nuxi dev web"
+  },
+  "dependencies": {
+    "@vueuse/core": "8.1.2",
+    "@vueuse/head": "0.7.5"
+  },
+  "devDependencies": {
+    "@nuxt/devalue": "2.0.0",
+    "@unocss/nuxt": "0.30.3",
+    "defu": "6.0.0",
+    "destr": "1.1.0",
+    "h3": "0.4.2",
+    "nuxt3": "3.0.0-27470218.7c1a8ae",
+    "ohmyfetch": "0.4.15",
+    "pathe": "0.2.0",
+    "std-env": "3.0.1",
+    "ufo": "0.8.1",
+    "unenv": "0.4.3",
+    "unocss": "0.30.3",
+    "vue": "3.2.31",
+    "vue-bundle-renderer": "0.3.5",
+    "webpack": "5.70.0"
+  }
+}
