@@ -20,7 +20,7 @@ importers:
 
   apps/web:
     specifiers:
-      '@iconify/vue': 3.1.4
+      '@iconify/vue': 3.2.0
       '@intlify/vite-plugin-vue-i18n': 3.2.2
       '@types/node': 16.11.26
       '@vitejs/plugin-vue': 2.1.0
@@ -42,7 +42,7 @@ importers:
       vue-i18n: 9.1.9_vue@3.2.31
       vue-router: 4.0.14_vue@3.2.31
     devDependencies:
-      '@iconify/vue': 3.1.4_vue@3.2.31
+      '@iconify/vue': 3.2.0_vue@3.2.31
       '@intlify/vite-plugin-vue-i18n': 3.2.2_vite@2.7.13+vue-i18n@9.1.9
       '@types/node': 16.11.26
       '@vitejs/plugin-vue': 2.1.0_vite@2.7.13+vue@3.2.31
@@ -74,8 +74,8 @@ packages:
       prettier: 2.5.1
     dev: true
 
-  /@iconify/vue/3.1.4_vue@3.2.31:
-    resolution: {integrity: sha512-oJm0VPl1fhlsbBX9tBeAbtmZ5iHCxCkVQdCi81lxdA3cqc9yqBlCloqObX93/YWNM5N8j/j0Efk6iSwsihOoNA==}
+  /@iconify/vue/3.2.0_vue@3.2.31:
+    resolution: {integrity: sha512-sBWkef1Pp3vjDfU92UjTnvN9BsJ5o4TVdIN8+Yx+TGEwLcujty7/vq1m9FhJ9D8/ZTAN2MttKojj80s6j4FqGg==}
     peerDependencies:
       vue: 3.x
     dependencies:
