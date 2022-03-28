@@ -21,7 +21,7 @@ importers:
   apps/web:
     specifiers:
       '@iconify/vue': 3.2.0
-      '@intlify/vite-plugin-vue-i18n': 3.2.2
+      '@intlify/vite-plugin-vue-i18n': 3.3.1
       '@types/node': 16.11.26
       '@vitejs/plugin-vue': 2.1.0
       '@vueuse/core': 7.6.2
@@ -43,7 +43,7 @@ importers:
       vue-router: 4.0.14_vue@3.2.31
     devDependencies:
       '@iconify/vue': 3.2.0_vue@3.2.31
-      '@intlify/vite-plugin-vue-i18n': 3.2.2_vite@2.7.13+vue-i18n@9.1.9
+      '@intlify/vite-plugin-vue-i18n': 3.3.1_vite@2.7.13+vue-i18n@9.1.9
       '@types/node': 16.11.26
       '@vitejs/plugin-vue': 2.1.0_vite@2.7.13+vue@3.2.31
       typescript: 4.5.5
@@ -162,8 +162,8 @@ packages:
     engines: {node: '>= 12'}
     dev: true
 
-  /@intlify/vite-plugin-vue-i18n/3.2.2_vite@2.7.13+vue-i18n@9.1.9:
-    resolution: {integrity: sha512-d5SCEVanpF8yJFI15q6Q1vXB0t+pChSkbD3riT+/ih4LXqY8ZsUim053f4auhToj40wwVtF/9Fa9zioQbQGQbA==}
+  /@intlify/vite-plugin-vue-i18n/3.3.1_vite@2.7.13+vue-i18n@9.1.9:
+    resolution: {integrity: sha512-b9HIUANzL4/LmrA5RqeiPabZl2/RiWNAJ90TVZ8kSi3APRZ4BbmwUAclKe8ip+1jCDhqaGO/qfAI7SbQ0Y76Uw==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: ^9.0.0
