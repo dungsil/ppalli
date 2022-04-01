@@ -6,9 +6,10 @@
 
 1. 상단의 `Use this template`으로 레파지토리 생성 혹은 `Code > Download zip` 클릭으로 소스코드 다운로드
 2. 아래의 문자열 목록을 대소문자를 구분하여 대치
-	* `ReadableProjectname`: 프로젝트 명
-	* `projectname`: 프로젝트 명, 영소문자, 숫자, `-` 사용 가능
-	* `companyname`: 회사 혹은 저작권자 명
+  * `PPALLI`: 약어, 대문자 영문자
+  * `ReadableProjectname`: 프로젝트 명
+  * `projectname`: 프로젝트 명, 영소문자, 숫자, `-` 사용 가능
+  * `companyname`: 회사 혹은 저작권자 명
 4. 해당 고지문 제거 (`---` 윗 부분 모두 제거)
 
 ###### 라이선스

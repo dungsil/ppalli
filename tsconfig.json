@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ES2021",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "types": [
+      "node",
+      "vite/client",
+      "vite-plugin-pages/client",
+      "@intlify/vite-plugin-vue-i18n/client"
+    ]
+  }
+}

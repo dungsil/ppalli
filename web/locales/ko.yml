@@ -1,0 +1,7 @@
+meta:
+  title: ReadableProjectname
+
+index:
+  title: 메인 페이지
+  hello: 안녕
+  world: 세상!

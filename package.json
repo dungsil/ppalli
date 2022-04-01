@@ -7,27 +7,27 @@
     "docker:start": "docker-compose -p projectname --env-file ./common/.env.dev up -d",
     "docker:stop": "docker-compose -p projectname --env-file ./common/.env.dev down",
     "docker:restart": "docker-compose -p projectname --env-file ./common/.env.dev up --force-recreate -d",
-    "web:dev": "nuxi dev web"
+    "web:dev": "vite-ssr dev",
+    "web:build": "vite-ssr build"
   },
   "dependencies": {
-    "@vueuse/core": "8.1.2",
-    "@vueuse/head": "0.7.5"
+    "@vueuse/core": "8.2.0",
+    "@vueuse/head": "0.7.5",
+    "dotenv": "16.0.0",
+    "vite-ssr": "0.15.0",
+    "vue": "3.2.31",
+    "vue-i18n": "9.1.9",
+    "vue-router": "4.0.14"
   },
   "devDependencies": {
-    "@nuxt/devalue": "2.0.0",
-    "@unocss/nuxt": "0.30.3",
-    "defu": "6.0.0",
-    "destr": "1.1.0",
-    "h3": "0.4.2",
-    "nuxt3": "3.0.0-27470218.7c1a8ae",
-    "ohmyfetch": "0.4.15",
-    "pathe": "0.2.0",
-    "std-env": "3.0.1",
-    "ufo": "0.8.1",
-    "unenv": "0.4.3",
-    "unocss": "0.30.3",
-    "vue": "3.2.31",
-    "vue-bundle-renderer": "0.3.5",
-    "webpack": "5.70.0"
+    "@intlify/vite-plugin-vue-i18n": "3.3.1",
+    "@types/node": "17.0.23",
+    "@vitejs/plugin-vue": "2.2.0",
+    "rollup": "2.70.1",
+    "typescript": "4.5.4",
+    "unocss": "0.30.8",
+    "vite": "~2.7.13",
+    "vite-plugin-pages": "0.22.0",
+    "vue-tsc": "0.29.8"
   }
 }

@@ -1,2 +1,7 @@
 meta:
   title: ReadableProjectname
+
+index:
+  title: Index page
+  hello: hello
+  world: world!
