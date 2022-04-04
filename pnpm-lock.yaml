@@ -10,7 +10,7 @@ specifiers:
   rollup: 2.70.1
   typescript: 4.5.4
   unocss: 0.30.8
-  vite: ~2.7.13
+  vite: 2.7.13
   vite-plugin-pages: 0.22.0
   vite-ssr: 0.15.0
   vue: 3.2.31
