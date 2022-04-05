@@ -2,7 +2,11 @@ import ViteSSR from 'vite-ssr'
 import routes from 'virtual:generated-pages'
 import { getLocaleForUrl } from './modules/i18n'
 
+import '@unocss/reset/sanitize/sanitize.css'
+import '@unocss/reset/sanitize/forms.css'
+import '@unocss/reset/sanitize/assets.css'
 import 'uno.css'
+
 import App from './App.vue'
 
 export default ViteSSR(
@@ -13,7 +17,6 @@ export default ViteSSR(
       return `/${getLocaleForUrl(url.pathname)}/`
     }
   },
-  async (ctx) => {
-  // Install Modules
-  Object.values(import.meta.globEager('./modules/*.ts')).map((m) => m.install?.(ctx))
+  (ctx) => {
+    Object.values(import.meta.globEager('./modules/*.ts')).map((m) => m.install?.(ctx))
 })

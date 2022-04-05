@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@intlify/vite-plugin-vue-i18n': 3.3.1
   '@types/node': 17.0.23
+  '@unocss/reset': 0.30.11
   '@vitejs/plugin-vue': 2.2.0
   '@vueuse/core': 8.2.4
   '@vueuse/head': 0.7.5
@@ -19,6 +20,7 @@ specifiers:
   vue-tsc: 0.29.8
 
 dependencies:
+  '@unocss/reset': 0.30.11
   '@vueuse/core': 8.2.4_vue@3.2.31
   '@vueuse/head': 0.7.5_vue@3.2.31
   dotenv: 16.0.0
@@ -102,8 +104,8 @@ packages:
       - supports-color
     dev: true
 
-  /@intlify/bundle-utils/2.2.1_vue-i18n@9.1.9:
-    resolution: {integrity: sha512-8n8zhYEKypS+KP22KUAC6BnQifJDDWUGcn3OVPqsThqMMucU22MShGvOuiKqQ4AeT7XQ5O4pudlJmxv3L91JrQ==}
+  /@intlify/bundle-utils/3.0.0_vue-i18n@9.1.9:
+    resolution: {integrity: sha512-y43Z5Q3ZJvxqtD8xUH6U3yrlZeay7ZTqkzv1GQ4b0mGQtk5uptOT9Ra4qvGuUv8QyPQsortrA/OHWUD5ax5ZNQ==}
     engines: {node: '>= 12'}
     peerDependencies:
       petite-vue-i18n: '*'
@@ -195,7 +197,7 @@ packages:
       vue-i18n:
         optional: true
     dependencies:
-      '@intlify/bundle-utils': 2.2.1_vue-i18n@9.1.9
+      '@intlify/bundle-utils': 3.0.0_vue-i18n@9.1.9
       '@intlify/shared': 9.2.0-beta.34
       '@rollup/pluginutils': 4.2.0
       debug: 4.3.4
@@ -364,6 +366,10 @@ packages:
       '@unocss/core': 0.30.8
       '@unocss/preset-mini': 0.30.8
     dev: true
+
+  /@unocss/reset/0.30.11:
+    resolution: {integrity: sha512-nWw7mvzgjRGa0f9KHpB5SOdP0p44OyKSLFfV/U97ge04eexKT7X1NfJ7mLZuhJp3B0ukf6oES0jtRNPZA1VIjA==}
+    dev: false
 
   /@unocss/reset/0.30.8:
     resolution: {integrity: sha512-+a05roJmEtkTwp4VovopdjOKCvWZKv6YEuhnY5ZoMepZRH8W36B7xNvr6ZxpEwx51W1wxS2VOAdTmlk7uhKMiw==}
