@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@unocss/reset": "0.30.11",
-    "@vueuse/core": "8.2.4",
+    "@vueuse/core": "8.2.5",
     "@vueuse/head": "0.7.5",
     "dotenv": "16.0.0",
     "vite-ssr": "0.15.0",
