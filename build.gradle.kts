@@ -7,7 +7,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   // Kotlin plugin
   kotlin("jvm") version "1.6.21"
-  kotlin("kapt") version "1.6.20"
+  kotlin("kapt") version "1.6.21"
   kotlin("plugin.spring") version "1.6.10"
   kotlin("plugin.jpa") version "1.6.10"
 
