@@ -6,7 +6,7 @@ specifiers:
   '@unocss/reset': 0.30.11
   '@vitejs/plugin-vue': 2.2.0
   '@vueuse/core': 8.2.5
-  '@vueuse/head': 0.7.5
+  '@vueuse/head': 0.7.6
   dotenv: 16.0.1
   rollup: 2.70.1
   typescript: 4.5.4
@@ -22,9 +22,9 @@ specifiers:
 dependencies:
   '@unocss/reset': 0.30.11
   '@vueuse/core': 8.2.5_vue@3.2.37
-  '@vueuse/head': 0.7.5_vue@3.2.37
+  '@vueuse/head': 0.7.6_vue@3.2.37
   dotenv: 16.0.1
-  vite-ssr: 0.16.0_55205334557eac1ff4bb78022f7425ef
+  vite-ssr: 0.16.0_57d0881c8f4eefbc3f6795fa5f954a99
   vue: 3.2.37
   vue-i18n: 9.1.10_vue@3.2.37
   vue-router: 4.0.14_vue@3.2.37
@@ -605,8 +605,8 @@ packages:
       vue-demi: 0.12.5_vue@3.2.37
     dev: false
 
-  /@vueuse/head/0.7.5_vue@3.2.37:
-    resolution: {integrity: sha512-L+XQ5Act0nT/ZyO8Qo10J4FyM1qPOyQb6MT4MMn6+AITzrStpmKs/nUDDLJKD/rCcNWl/65XbdQm4T2vKp3VOQ==}
+  /@vueuse/head/0.7.6_vue@3.2.37:
+    resolution: {integrity: sha512-cOWqCkT3WiF5oEpw+VVEWUJd9RLD5rc7DmnFp3cePsejp+t7686uKD9Z9ZU7Twb7R/BI8iexKTmXo9D/F3v6UA==}
     peerDependencies:
       vue: '>=3'
     dependencies:
@@ -2154,7 +2154,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-ssr/0.16.0_55205334557eac1ff4bb78022f7425ef:
+  /vite-ssr/0.16.0_57d0881c8f4eefbc3f6795fa5f954a99:
     resolution: {integrity: sha512-Yo6dO1gT019+aeTSEGV0ggiL06wy8VHMcM9nkv58upfMWLBsaIyr5zJufuEtDsaNyMS7r30IACuTmbpk7IPReg==}
     hasBin: true
     peerDependencies:
@@ -2190,7 +2190,7 @@ packages:
       '@rollup/plugin-replace': 3.1.0_rollup@2.70.1
       '@vitejs/plugin-vue': 2.2.0_vite@2.9.12+vue@3.2.37
       '@vue/server-renderer': 3.2.33_vue@3.2.37
-      '@vueuse/head': 0.7.5_vue@3.2.37
+      '@vueuse/head': 0.7.6_vue@3.2.37
       chalk: 4.1.2
       connect: 3.7.0
       node-fetch: 2.6.7
