@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@intlify/vite-plugin-vue-i18n': 3.3.1
@@ -24,13 +24,13 @@ dependencies:
   '@vueuse/core': 8.2.5_vue@3.2.37
   '@vueuse/head': 0.7.6_vue@3.2.37
   dotenv: 16.0.1
-  vite-ssr: 0.16.0_57d0881c8f4eefbc3f6795fa5f954a99
+  vite-ssr: 0.16.0_k7iiqhepj3x3yp3hsx5f7fkkte
   vue: 3.2.37
   vue-i18n: 9.1.10_vue@3.2.37
   vue-router: 4.0.14_vue@3.2.37
 
 devDependencies:
-  '@intlify/vite-plugin-vue-i18n': 3.3.1_vite@2.9.12+vue-i18n@9.1.10
+  '@intlify/vite-plugin-vue-i18n': 3.3.1_jg524lrp6mwbliyl7dcdb54k4a
   '@types/node': 17.0.23
   '@vitejs/plugin-vue': 2.2.0_vite@2.9.12+vue@3.2.37
   rollup: 2.70.1
@@ -185,7 +185,7 @@ packages:
     engines: {node: '>= 12'}
     dev: true
 
-  /@intlify/vite-plugin-vue-i18n/3.3.1_vite@2.9.12+vue-i18n@9.1.10:
+  /@intlify/vite-plugin-vue-i18n/3.3.1_jg524lrp6mwbliyl7dcdb54k4a:
     resolution: {integrity: sha512-b9HIUANzL4/LmrA5RqeiPabZl2/RiWNAJ90TVZ8kSi3APRZ4BbmwUAclKe8ip+1jCDhqaGO/qfAI7SbQ0Y76Uw==}
     engines: {node: '>= 12'}
     peerDependencies:
@@ -2154,7 +2154,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-ssr/0.16.0_57d0881c8f4eefbc3f6795fa5f954a99:
+  /vite-ssr/0.16.0_k7iiqhepj3x3yp3hsx5f7fkkte:
     resolution: {integrity: sha512-Yo6dO1gT019+aeTSEGV0ggiL06wy8VHMcM9nkv58upfMWLBsaIyr5zJufuEtDsaNyMS7r30IACuTmbpk7IPReg==}
     hasBin: true
     peerDependencies:
