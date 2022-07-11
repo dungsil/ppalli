@@ -1,10 +1,10 @@
 # 어플리케이션 설정
 projectname:
   auth:
-    issuer: ${env.PPALLI_AUTH_ISSUER:${PPALLI_AUTH_ISSUER}}
-    secret: ${env.PPALLI_AUTH_SECRET:${PPALLI_AUTH_SECRET}}
-    access-token-expires: ${env.PPALLI_AUTH_EXPIRES:${PPALLI_AUTH_EXPIRES}}
-    refresh-token-expires: ${env.PPALLI_AUTH_REFRESH_EXPIRE:${PPALLI_AUTH_REFRESH_EXPIRE}}
+    issuer: ${PPALLI_AUTH_ISSUER}
+    secret: ${PPALLI_AUTH_SECRET}
+    access-token-expires: ${PPALLI_AUTH_EXPIRES}
+    refresh-token-expires: ${PPALLI_AUTH_REFRESH_EXPIRE}
 
 # Spring boot 설정
 spring:
@@ -16,12 +16,12 @@ spring:
     date-format: com.fasterxml.jackson.databind.util.StdDateFormat
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://${env.PPALLI_DB_HOST:${PPALLI_DB_HOST}}:${env.PPALLI_DB_PORT:${PPALLI_DB_PORT}}/${env.PPALLI_DB_NAME:${PPALLI_DB_NAME}}"
-    username: ${env.PPALLI_DB_USERNAME:${PPALLI_DB_USERNAME}}
-    password: ${env.PPALLI_DB_PASSWORD:${PPALLI_DB_PASSWORD}}
+    url: "jdbc:postgresql://${PPALLI_DB_HOST}:${PPALLI_DB_PORT}/${PPALLI_DB_NAME}"
+    username: ${PPALLI_DB_USERNAME}
+    password: ${PPALLI_DB_PASSWORD}
   redis:
-    host: ${env.PPALLI_REDIS_HOST:${PPALLI_REDIS_HOST}}
-    port: ${env.PPALLI_REDIS_PORT:${PPALLI_REDIS_PORT}}
+    host: ${PPALLI_REDIS_HOST}
+    port: ${PPALLI_REDIS_PORT}
   liquibase:
     change-log: "classpath:db/main.yml" # 데이터베이스 마이그레이션 설정 파일 위치
   jpa:
@@ -38,3 +38,7 @@ server:
     include-message: never
     include-stacktrace: never
     include-exception: false
+
+.env:
+  prefix: ""
+  systemProperties: true
