@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import pages from 'vite-plugin-pages'
 import i18n from '@intlify/vite-plugin-vue-i18n'
 import unocss from 'unocss/vite'
+import tls from '@vitejs/plugin-basic-ssl'
 
 export default defineConfig({
   plugins: [
@@ -18,7 +19,8 @@ export default defineConfig({
       runtimeOnly: true,
       compositionOnly: true,
       include: resolve(__dirname, 'web/locales/**')
-    })
+    }),
+    tls()
   ],
   optimizeDeps: {
     include: ['vue', 'vue-router', '@vueuse/core'],
