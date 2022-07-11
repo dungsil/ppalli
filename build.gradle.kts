@@ -1,4 +1,3 @@
-
 import org.gradle.api.JavaVersion.VERSION_17
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -6,14 +5,14 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 // 하위 어플리케이션을 전역적으로 관리하기 위한 설정
 plugins {
   // Kotlin plugin
-  kotlin("jvm") version "1.6.21"
-  kotlin("kapt") version "1.6.21"
-  kotlin("plugin.spring") version "1.6.21"
-  kotlin("plugin.jpa") version "1.6.21"
+  kotlin("jvm") version "1.7.10"
+  kotlin("kapt") version "1.7.10"
+  kotlin("plugin.spring") version "1.7.10"
+  kotlin("plugin.jpa") version "1.7.10"
 
   // Spring boot plugin
-  id("org.springframework.boot") version "2.6.4"
-  id("io.spring.dependency-management") version "1.0.11.RELEASE"
+  id("org.springframework.boot") version "2.7.1"
+  id("io.spring.dependency-management") version "1.0.12.RELEASE"
 }
 
 group = "packagename"
@@ -37,7 +36,7 @@ dependencies {
   implementation("org.springframework.boot:spring-boot-starter-data-jpa")
   implementation("org.springframework.boot:spring-boot-starter-data-redis")
   implementation("org.springframework.boot:spring-boot-starter-web")
-  implementation("me.paulschwarz:spring-dotenv:2.4.1")
+  implementation("me.paulschwarz:spring-dotenv:2.5.4")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
 
   // Jackson
