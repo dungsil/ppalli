@@ -8,6 +8,8 @@ projectname:
 
 # Spring boot 설정
 spring:
+  main:
+    allow-bean-definition-overriding: true
   session:
     store-type: redis
   jackson:
