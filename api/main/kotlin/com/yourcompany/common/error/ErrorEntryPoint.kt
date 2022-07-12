@@ -1,6 +1,7 @@
 package com.yourcompany.common.error
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
@@ -13,13 +14,17 @@ import javax.servlet.http.HttpServletResponse
  */
 @Component
 class ErrorEntryPoint(private val om: ObjectMapper) : AuthenticationEntryPoint {
+  private val log = LoggerFactory.getLogger(this.javaClass)
+
   override fun commence(
     request: HttpServletRequest?,
     response: HttpServletResponse,
     authException: AuthenticationException?
   ) {
+    authException?.let { log.debug("Unauthorized error: ${authException.message}", authException) }
+
     response.apply {
-      status = 400
+      status = 401 // Unauthorized
       contentType = "application/json;charset=UTF-8"
 
       writer.apply {
