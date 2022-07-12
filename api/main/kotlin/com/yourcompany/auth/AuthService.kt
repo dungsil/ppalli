@@ -16,7 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.Instant
 import java.time.Instant.now
-import java.util.*
+import java.util.Date
+import java.util.UUID
 import javax.transaction.Transactional
 
 
@@ -170,7 +171,8 @@ class AuthService(
   fun saveSession(account: Account, accessToken: String, refreshToken: UUID) {
     val session = sessions.findById(account.id)
       ?.apply { this.accessToken = accessToken } // 엑세스 토큰 업데이트
-      ?: AuthSession( // 토큰이 기존에 존재하지 않으면 새로 생성
+      ?: AuthSession(
+        // 토큰이 기존에 존재하지 않으면 새로 생성
         id = account.id,
         accessToken = accessToken,
         refreshToken = refreshToken,
