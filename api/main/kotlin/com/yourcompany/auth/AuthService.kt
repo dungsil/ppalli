@@ -8,8 +8,8 @@ import com.yourcompany.account.AccountRepository
 import com.yourcompany.auth.exception.ExpireTokenException
 import com.yourcompany.auth.exception.LockedAccountException
 import com.yourcompany.auth.exception.LoginFailException
-import com.yourcompany.common.extensions.getClientIp
-import com.yourcompany.common.extensions.getHttpServletRequest
+import com.yourcompany.common.extension.getClientIp
+import com.yourcompany.common.extension.getHttpServletRequest
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.crypto.password.PasswordEncoder

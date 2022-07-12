@@ -1,4 +1,4 @@
-package com.yourcompany.common.extensions
+package com.yourcompany.common.extension
 
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes

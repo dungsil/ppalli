@@ -1,7 +1,7 @@
 package com.yourcompany.auth.filter
 
 import com.yourcompany.auth.AuthService
-import com.yourcompany.common.extensions.getAccessToken
+import com.yourcompany.common.extension.getAccessToken
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
