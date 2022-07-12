@@ -16,7 +16,7 @@ spring:
     date-format: com.fasterxml.jackson.databind.util.StdDateFormat
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: "jdbc:postgresql://${PPALLI_DB_HOST}:${PPALLI_DB_PORT}/${PPALLI_DB_NAME}"
+    url: "jdbc:postgresql://${PPALLI_DB_HOST}:${PPALLI_DB_PORT}/${PPALLI_DB_DATABASE}"
     username: ${PPALLI_DB_USERNAME}
     password: ${PPALLI_DB_PASSWORD}
   redis:

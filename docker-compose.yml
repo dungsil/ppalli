@@ -2,20 +2,23 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:13-alpine
+    container_name: projectname_postgresql
+    image: bitnami/postgresql:14
     ports:
       - "${PPALLI_DB_PORT}:5432"
     volumes:
       - postgres:/var/lib/postgresql/data
     environment:
-      LANG: C.utf8
-      POSTGRES_USER: ${PPALLI_DB_USERNAME}
-      POSTGRES_PASSWORD: ${PPALLI_DB_PASSWORD}
-      POSTGRES_DB: ${PPALLI_DB_NAME}
+      POSTGRESQL_USERNAME: ${PPALLI_DB_USERNAME}
+      POSTGRESQL_PASSWORD: ${PPALLI_DB_PASSWORD}
+      POSTGRESQL_DATABASE: ${PPALLI_DB_DATABASE}
   redis:
-    image: redis:6.2-alpine
+    container_name: projectname_redis
+    image: bitnami/redis:6.2
     ports:
       - "${PPALLI_REDIS_PORT}:6379"
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
 
 volumes:
   postgres:
