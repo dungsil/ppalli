@@ -19,3 +19,10 @@ server:
   systemProperties: true
   directory: common
   filename: .env.dev
+
+logging:
+  level:
+    root: INFO
+    web: DEBUG
+    sql: DEBUG
+    com.yourcompany: DEBUG
