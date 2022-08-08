@@ -43,7 +43,7 @@ dependencies {
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
   // Jwt 구현체
-  implementation("com.auth0:java-jwt:3.18.3")
+  implementation("com.auth0:java-jwt:3.19.2")
 
   // JDBC 드라이버 및 데이터베이스 도구
   implementation("org.liquibase:liquibase-core")
