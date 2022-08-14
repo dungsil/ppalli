@@ -28,7 +28,7 @@
     "rollup": "2.70.1",
     "typescript": "4.5.4",
     "unocss": "0.30.8",
-    "vite": "2.9.12",
+    "vite": "2.9.15",
     "vite-plugin-pages": "0.22.0",
     "vue-tsc": "0.29.8"
   }
